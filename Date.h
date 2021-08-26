@@ -5,6 +5,7 @@ private:
 	int month;
 	int year;
 public:
+	Date() = default;
 	Date(int, int, int);
 	void setDay(int);
 	void setMonth(int);

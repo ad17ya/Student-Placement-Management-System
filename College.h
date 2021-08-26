@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include "Student.h"
 using namespace std;
@@ -9,14 +10,14 @@ private:
 	int collegeCode;
 	string collegeEmail;
 	string phoneNumber;
-	vector<Student> studentList;
+	// vector<Student> studentList;
 
 public:
 
 	// Constructors
 	College() = default; 									 	// Default 
 	College(string, int, string, string, vector<Student>);		// Parameterized
-	College(College&) = default;								// Copy
+	College(const College&) = default;								// Copy
 
 	// Setter and Getter methods
 	void setName(string);

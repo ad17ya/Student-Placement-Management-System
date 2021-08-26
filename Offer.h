@@ -1,9 +1,9 @@
 #pragma once
 #include<iostream>
+#include<vector>
+#include"College.h"
 #include"Date.h"
 #include"Eligibility.h"
-#include"College.h"
-#include<vector>
 using namespace std;
 //add comments
 
@@ -15,7 +15,7 @@ private:
 	float bond;
 	Date applicationDeadline;
 	Eligibility eligibilityCriteria;
-	vector<College> collgeList;
+	vector<College> collegeList;
 
 public:
 	void setJobRole(string);

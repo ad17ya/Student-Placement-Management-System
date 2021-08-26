@@ -1,6 +1,4 @@
 #include "Offer.h"
-#include<string.h>
-#include<iostream>
 using namespace std;
 
 
@@ -26,9 +24,9 @@ void Offer::setBond(float b)
 
 void Offer::setDeadline(Date d)
 {
-	deadline.setDay(d.getDay());
-	deadline.setMonth(d.getMonth());
-	deadline.setYear(d.getYear());
+	applicationDeadline.setDay(d.getDay());
+	applicationDeadline.setMonth(d.getMonth());
+	applicationDeadline.setYear(d.getYear());
 }
 
 void Offer::setEligibility(Eligibility e)
@@ -58,7 +56,7 @@ float Offer::getBond()
 
 Date Offer::getDeadline()
 {
-	return deadline;
+	return applicationDeadline;
 }
 
 Eligibility Offer::getEligibility()

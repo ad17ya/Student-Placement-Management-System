@@ -1,71 +1,83 @@
-#include<iostream>
-#include"Eligibility.h"
-#include<string>
-#include<vector>
+#include <iostream>
+#include "Eligibility.h"
+#include <cstring>
+#include <string>
+#include <vector>
 using namespace std;
 
-Eligibility::Eligibility(float cgpa, int lb, int db, int yP, int yG, string skillSet): CGPA(cgpa), liveBackLog(lb), deadBackLog(db), yearGap(yG), passingYear(yP)
+Eligibility::Eligibility(double cgpa, int lb, int db, int yP, int yG, string skillSet) : CGPA(cgpa), liveBackLog(lb), deadBackLog(db), yearGap(yG), passingYear(yP)
 {
 	//skill1:level1,skill2:level2...
-	char* token;
-	token = strtok(const_cast<char*>(skillSet.c_str()), ",");
-	while (token != NULL) {
+	char *token;
+	const char *delim = ",";
+	char *next_token;
+	token = strtok(const_cast<char *>(skillSet.c_str()), delim);
+	while (token != NULL)
+	{
 		string s(token);
 		size_t pos = s.find(":");
 		skillExpertiseMap[s.substr(0, pos)] = stoi(s.substr(pos + 1, string::npos));
-		token = strtok(NULL, "\n");
+		token = strtok(NULL, delim);
 	}
 }
 
 Eligibility::Eligibility() = default;
 
-Eligibility::Eligibility(const Eligibility& e) : CGPA(e.CGPA), liveBackLog(e.liveBackLog), deadBackLog(e.deadBackLog), yearGap(e.yearGap), passingYear(e.passingYear)
+Eligibility::Eligibility(const Eligibility &e) : CGPA(e.CGPA), liveBackLog(e.liveBackLog), deadBackLog(e.deadBackLog), yearGap(e.yearGap), passingYear(e.passingYear)
 {
-	for (auto it : e.skillExpertiseMap) {
+	for (auto it : e.skillExpertiseMap)
+	{
 		skillExpertiseMap[it.first] = it.second;
 	}
 }
 
-void Eligibility::operator=(const Eligibility& e)
+void Eligibility::operator=(const Eligibility &e)
 {
 	CGPA = e.CGPA;
 	liveBackLog = e.liveBackLog;
 	deadBackLog = e.deadBackLog;
 	yearGap = e.yearGap;
 	passingYear = e.passingYear;
-	for (auto it : e.skillExpertiseMap) {
+	for (auto it : e.skillExpertiseMap)
+	{
 		skillExpertiseMap[it.first] = it.second;
 	}
 }
 
-
 //student on lhs of == operator
-bool Eligibility::operator==(const Eligibility& e)
+/*
+*/
+bool Eligibility::operator==(const Eligibility &e) const
 {
-	if (CGPA >= e.CGPA && liveBackLog <= e.liveBackLog && deadBackLog <= e.deadBackLog && yearGap <= e.yearGap && passingYear == e.passingYear) {
-		for (auto it : e.skillExpertiseMap) {
+	cout << "in ==\n";
+	if (CGPA >= e.CGPA && liveBackLog <= e.liveBackLog && deadBackLog <= e.deadBackLog && yearGap <= e.yearGap && passingYear == e.passingYear)
+	{
+		for (auto it : e.skillExpertiseMap)
+		{
 			auto findIterator = skillExpertiseMap.find(it.first);
-			if (findIterator != skillExpertiseMap.end()) {
-				if (findIterator->second < it.second) {
+			if (findIterator != skillExpertiseMap.end())
+			{
+				if (findIterator->second < it.second)
+				{
 					return false;
 				}
 			}
-			else {
+			else
+			{
 				return false;
 			}
 		}
 		return true;
 	}
 	return false;
-
 }
 
-void Eligibility::setCGPA(float cgpa)
+void Eligibility::setCGPA(double cgpa)
 {
 	CGPA = cgpa;
 }
 
-float Eligibility::getCGPA()
+double Eligibility::getCGPA()
 {
 	return CGPA;
 }
@@ -89,7 +101,6 @@ int Eligibility::getDeadBackLog()
 {
 	return deadBackLog;
 }
-
 
 int Eligibility::getYearGap()
 {

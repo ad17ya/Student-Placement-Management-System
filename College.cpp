@@ -1,6 +1,3 @@
-#include <iostream>
-#include <string.h>
-#include <sqlite3.h>
 #include "College.h"
 using namespace std;
 
@@ -67,13 +64,14 @@ static int callback(void *data, int argc, char **argv, char **azColName)
 void College::viewEnrolledStudents()
 {
 
+	// Open SQLite database
 	sqlite3 *DB;
 	int exit = 0;
 	exit = sqlite3_open("db.sqlite3", &DB);
 	string data("");
 
-	string sql("SELECT id,STUDENT_NAME FROM STUDENT");
-	string sql_count("SELECT COUNT(STUDENT_ID) FROM STUDENT");
+	// Pass queries to sql throught 
+	string sql("SELECT S.studentId_id, A.first_name, A.last_name, S.department FROM STUDENT_student S, auth_user A where S.id=A.id");
 
 	try
 	{
@@ -84,9 +82,9 @@ void College::viewEnrolledStudents()
 
 		int rc = sqlite3_exec(DB, sql.c_str(), callback, (void *)data.c_str(), NULL);
 		std::cout << std::endl;
-		int rc2 = sqlite3_exec(DB, sql_count.c_str(), callback, (void *)data.c_str(), NULL);
 
-		if (rc != SQLITE_OK || rc2 != SQLITE_OK)
+
+		if (rc != SQLITE_OK)
 		{
 			throw (short) -1;
 		}
@@ -104,9 +102,50 @@ void College::viewEnrolledStudents()
 			std::cerr << "Error getting count " << endl;
 	}
 
+	// Close sqlite
 	sqlite3_close(DB);
 }
 
 void College::updateStudentPlacedStatus()
 {
+	// Open SQLite database
+	sqlite3 *DB;
+	int exit = 0;
+	exit = sqlite3_open("db.sqlite3", &DB);
+	string data("");
+
+	// Update all records of the students placed from temporary table to the college database
+	string sql("UPDATE Student_student placedOffer_id = (SELECT offerId_id from College_intermediatestudentstatus WHERE status = 1 AND Student_student.studentId_id = College_intermediatestudentstatus.studentId_id)");
+
+	try
+	{
+		if (exit)
+			throw exit;
+
+		std::cout << "Opened database successfully" << std::endl;
+
+		int rc = sqlite3_exec(DB, sql.c_str(), NULL, NULL, NULL);
+		std::cout << std::endl;
+
+
+		if (rc != SQLITE_OK)
+		{
+			throw (short) -1;
+		}
+		
+		cout << "Operation OK!" << endl;
+	}
+
+	catch(int exit) {
+			std::cout << "Exception caught" << std::endl;
+			std::cerr << "Error open DB" << sqlite3_errmsg(DB) << std::endl;
+	}
+
+	catch(short rc) {
+			std::cout << "Exception caught" << endl;
+			std::cerr << "Error updating placed students " << endl;
+	}
+
+	// Close sqlite
+	sqlite3_close(DB);
 }

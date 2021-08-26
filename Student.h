@@ -1,18 +1,18 @@
 #pragma once
-#include<iostream>
-#include<vector>
-#include"Date.h"
-#include"Skill.h"
-#include"Eligibility.h"
-#include"Offer.h"
-#include<sqlite3.h>
-
+#include <iostream>
+#include <vector>
+#include "Date.h"
+#include "Skill.h"
+#include "Eligibility.h"
+//#include"Offer.h"
+#include <sqlite3.h>
 
 using namespace std;
 
 //Class describing student personal details and also academic details
 
-class Student {
+class Student
+{
 private:
 	string studentName;
 	int studentId;
@@ -20,12 +20,15 @@ private:
 	string studentPhoneNumber;
 	Date DOB;
 	string studentDepartment;
-	Eligibility studentAcademicDetails;	// data member describing student academic details
+	Eligibility studentAcademicDetails; // data member describing student academic details
+	vector<int> potentialOfferId;
+	int callbackHelper(char **argv);
 
 public:
 	//make get method const
 	Student();
-	Student(string, int, string, string, Date, string, const Eligibility&);
+	Student(string, int, string, string, Date, string, const Eligibility &);
+	Student(const Student &) = default;
 	void setName(string);
 	string getName();
 	void setID(int);
@@ -38,6 +41,7 @@ public:
 	Date getDate();
 	void setAcademicDetails(Eligibility);
 	Eligibility getAcademicDetails();
-	int* getApplicableOffers();
+	vector<int> getApplicableOffers();
 	void apply(int);
+	static int callback(void *, int, char **, char **);
 };
