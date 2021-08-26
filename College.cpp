@@ -69,10 +69,10 @@ void College::viewEnrolledStudents()
 
 	sqlite3 *DB;
 	int exit = 0;
-	exit = sqlite3_open("DATABASE_NAME.DB", &DB);
+	exit = sqlite3_open("db.sqlite3", &DB);
 	string data("");
 
-	string sql("SELECT STUDENT_ID,STUDENT_NAME FROM STUDENT");
+	string sql("SELECT id,STUDENT_NAME FROM STUDENT");
 	string sql_count("SELECT COUNT(STUDENT_ID) FROM STUDENT");
 
 	try
