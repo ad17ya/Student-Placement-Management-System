@@ -4,21 +4,28 @@
 #include"Date.h"
 #include"Skill.h"
 #include"Eligibility.h"
+#include"Offer.h"
+#include<sqlite3.h>
 
 
 using namespace std;
 
+//Class describing student personal details and also academic details
+
 class Student {
 private:
-	string Name;
-	int id;
+	string studentName;
+	int studentId;
 	string studentEmail;
-	string phoneNumber;
+	string studentPhoneNumber;
 	Date DOB;
-	string department;
-	Eligibility academicDetails;
+	string studentDepartment;
+	Eligibility studentAcademicDetails;	// data member describing student academic details
 
 public:
+	//make get method const
+	Student();
+	Student(string, int, string, string, Date, string, const Eligibility&);
 	void setName(string);
 	string getName();
 	void setID(int);
@@ -31,5 +38,6 @@ public:
 	Date getDate();
 	void setAcademicDetails(Eligibility);
 	Eligibility getAcademicDetails();
+	int* getApplicableOffers();
 	void apply(int);
 };
