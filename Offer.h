@@ -1,11 +1,10 @@
 #pragma once
 #include<iostream>
-#include<vector>
-#include"College.h"
 #include"Date.h"
 #include"Eligibility.h"
+#include"College.h"
+#include<vector>
 using namespace std;
-//add comments
 
 class Offer {
 private:
@@ -15,19 +14,28 @@ private:
 	float bond;
 	Date applicationDeadline;
 	Eligibility eligibilityCriteria;
-	vector<College> collegeList;
+	vector<College> collgeList;
 
 public:
+	Offer() = default;														//Default constructor
+	Offer(string, string, float, float, Date, const Eligibility&, vector<College>);		//Parameterized constructor
+	Offer(const Offer& of);												//Copy constructor
+	void operator=(const Offer&);
+
+	void addCollege(College);
 	void setJobRole(string);
 	void setJobLocation(string);
 	void setPackage(float);
 	void setBond(float);
 	void setDeadline(Date);
 	void setEligibility(Eligibility);
-	string getJobRole();
-	string getJobLocation();
-	float getPackage();
-	float getBond();
-	Date getDeadline();
-	Eligibility getEligibility();
+
+	string const getJobRole();
+	string const getJobLocation();
+	float const getPackage();
+	float const getBond();
+	Date const getDeadline();
+	Eligibility const getEligibility();
+
+	~Offer() = default;														//Destructor
 };

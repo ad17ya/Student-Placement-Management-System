@@ -77,7 +77,7 @@ void Eligibility::setCGPA(double cgpa)
 	CGPA = cgpa;
 }
 
-double Eligibility::getCGPA()
+double const Eligibility::getCGPA()
 {
 	return CGPA;
 }
@@ -87,7 +87,7 @@ void Eligibility::setLiveBackLog(int lb)
 	liveBackLog = lb;
 }
 
-int Eligibility::getLiveBackLog()
+int const Eligibility::getLiveBackLog()
 {
 	return liveBackLog;
 }
@@ -97,12 +97,12 @@ void Eligibility::setDeadBackLog(int db)
 	deadBackLog = db;
 }
 
-int Eligibility::getDeadBackLog()
+int const Eligibility::getDeadBackLog()
 {
 	return deadBackLog;
 }
 
-int Eligibility::getYearGap()
+int const Eligibility::getYearGap()
 {
 	return yearGap;
 }

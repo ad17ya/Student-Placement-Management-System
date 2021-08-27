@@ -7,6 +7,10 @@ College::College(string mCollegeName, int mCollegeCode, string mCollegeEmail, st
 // Copy Constructor
 // College(const College &collegeObject) : collegeName(collegeObject.collegeName), collegeCode(collegeObject.collegeCode), collegeEmail(collegeObject.collegeEmail), phoneNumber(collegeObject.phoneNumber) , studentList(collegeObject.studentList)  {}
 
+void College::addStudent(const Student &s) {
+	studentList.push_back(s);
+}
+
 void College::setName(string s)
 {
 	collegeName = s;
@@ -27,22 +31,22 @@ void College::setPhoneNumber(string pn)
 	phoneNumber = pn;
 }
 
-string College::getName()
+string const College::getName()
 {
 	return collegeName;
 }
 
-int College::getCollegeCode()
+int const College::getCollegeCode()
 {
 	return collegeCode;
 }
 
-string College::getEmail()
+string const College::getEmail()
 {
 	return collegeEmail;
 }
 
-string College::getPhoneNumber()
+string const College::getPhoneNumber()
 {
 	return phoneNumber;
 }
@@ -70,7 +74,7 @@ void College::viewEnrolledStudents()
 	exit = sqlite3_open("db.sqlite3", &DB);
 	string data("");
 
-	// Pass queries to sql throught 
+	// Pass queries to sql throught
 	string sql("SELECT S.studentId_id, A.first_name, A.last_name, S.department FROM STUDENT_student S, auth_user A where S.id=A.id");
 
 	try
@@ -88,7 +92,7 @@ void College::viewEnrolledStudents()
 		{
 			throw (short) -1;
 		}
-		
+
 		cout << "Operation OK!" << endl;
 	}
 
@@ -132,7 +136,7 @@ void College::updateStudentPlacedStatus()
 		{
 			throw (short) -1;
 		}
-		
+
 		cout << "Operation OK!" << endl;
 	}
 

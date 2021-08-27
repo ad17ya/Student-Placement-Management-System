@@ -1,12 +1,11 @@
 #pragma once
 #include <iostream>
 
-#include "Skill.h"
 #include <map>
 using namespace std;
 //add comments
 //add namespaces
-//
+
 class Eligibility
 {
 private:
@@ -25,12 +24,12 @@ public:
 	void operator=(const Eligibility &);
 	bool operator==(const Eligibility &e) const;
 	void setCGPA(double);
-	double getCGPA();
+	double const getCGPA();
 	void setLiveBackLog(int);
-	int getLiveBackLog();
+	int const getLiveBackLog();
 	void setDeadBackLog(int);
-	int getDeadBackLog();
-	int getYearGap();
+	int const getDeadBackLog();
+	int const getYearGap();
 	void setYearGap(int);
 	void addSkill(string, string);
 };

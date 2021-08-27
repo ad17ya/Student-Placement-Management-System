@@ -2,7 +2,6 @@
 #include <iostream>
 #include <vector>
 #include "Date.h"
-#include "Skill.h"
 #include "Eligibility.h"
 //#include"Offer.h"
 #include <sqlite3.h>
@@ -42,6 +41,6 @@ public:
 	void setAcademicDetails(Eligibility);
 	Eligibility getAcademicDetails();
 	vector<int> getApplicableOffers();
-	void apply(int);
+	void applyForCompany(int); // int is offerid
 	static int callback(void *, int, char **, char **);
 };

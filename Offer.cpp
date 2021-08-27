@@ -1,65 +1,99 @@
 #include "Offer.h"
+#include<string.h>
+#include<iostream>
 using namespace std;
 
-
-void Offer::setJobRole(string s)
-{
-	jobRole = s;
+//parameterized constructor
+Offer::Offer(string role, string location, float pack, float bo, Date deadline, const Eligibility& eObj, vector<College> cvObj) :
+	jobRole(role), jobLocation(location), package(pack), bond(bo), applicationDeadline(deadline), eligibilityCriteria(eObj) {
+	collgeList = cvObj;
 }
 
-void Offer::setJobLocation(string jl)
-{
-	jobLocation = jl;
+//Copy constructor
+Offer::Offer(const Offer& of) {
+	jobRole = of.jobRole;
+	jobLocation = of.jobLocation;
+	package = of.package;
+	bond = of.bond;;
+	applicationDeadline = of.applicationDeadline;
+	eligibilityCriteria = of.eligibilityCriteria;
+	collgeList = of.collgeList;
 }
 
-void Offer::setPackage(float pk)
-{
-	package = pk;
+void Offer::operator=(const Offer& of) {
+	jobRole = of.jobRole;
+	jobLocation = of.jobLocation;
+	package = of.package;
+	bond = of.bond;;
+	applicationDeadline = of.applicationDeadline;
+	eligibilityCriteria = of.eligibilityCriteria;
+	collgeList = of.collgeList;
 }
 
-void Offer::setBond(float b)
-{
-	bond = b;
+void Offer::addCollege(College collgeObj) {
+	collgeList.push_back(collgeObj);
 }
 
-void Offer::setDeadline(Date d)
+//setter methods
+void Offer::setJobRole(string role)
 {
-	applicationDeadline.setDay(d.getDay());
-	applicationDeadline.setMonth(d.getMonth());
-	applicationDeadline.setYear(d.getYear());
+	jobRole = role;
 }
 
-void Offer::setEligibility(Eligibility e)
+void Offer::setJobLocation(string location)
 {
-	eligibilityCriteria = e;
+	jobLocation = location;
 }
 
-string Offer::getJobRole()
+void Offer::setPackage(float pack)
+{
+	package = pack;
+}
+
+void Offer::setBond(float bond)
+{
+	bond = bond;
+}
+
+void Offer::setDeadline(Date deadline)
+{
+	applicationDeadline.setDay(deadline.getDay());
+	applicationDeadline.setMonth(deadline.getMonth());
+	applicationDeadline.setYear(deadline.getYear());
+}
+
+void Offer::setEligibility(Eligibility criteria)
+{
+	eligibilityCriteria = criteria;
+}
+
+//getter methods
+string const Offer::getJobRole()
 {
 	return jobRole;
 }
 
-string Offer::getJobLocation()
+string const Offer::getJobLocation()
 {
 	return jobLocation;
 }
 
-float Offer::getPackage()
+float const Offer::getPackage()
 {
 	return package;
 }
 
-float Offer::getBond()
+float const Offer::getBond()
 {
 	return bond;
 }
 
-Date Offer::getDeadline()
+Date const Offer::getDeadline()
 {
 	return applicationDeadline;
 }
 
-Eligibility Offer::getEligibility()
+Eligibility const Offer::getEligibility()
 {
 	return eligibilityCriteria;
 }
