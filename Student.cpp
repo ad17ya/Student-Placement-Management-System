@@ -16,7 +16,7 @@ void Student::setName(string s)
     studentName = s;
 }
 
-string const Student::getName()
+string Student::getName() const 
 {
     return studentName;
 }
@@ -26,7 +26,7 @@ void Student::setID(int i)
     studentId = i;
 }
 
-int const Student::getID()
+int Student::getID() const 
 {
     return studentId;
 }
@@ -36,7 +36,7 @@ void Student::setEmail(string e)
     studentEmail = e;
 }
 
-string const Student::getEmail()
+string Student::getEmail() const 
 {
     return studentEmail;
 }
@@ -46,7 +46,7 @@ void Student::setPhoneNumber(string ph)
     studentPhoneNumber = ph;
 }
 
-string const Student::getPhoneNumber()
+string Student::getPhoneNumber() const 
 {
     return studentPhoneNumber;
 }
@@ -58,7 +58,7 @@ void Student::setDOB(Date d)
     DOB.setYear(d.getYear());
 }
 
-Date const Student::getDate()
+Date Student::getDate() const 
 {
     return DOB;
 }
@@ -187,4 +187,15 @@ void Student::applyForCompany(int offerId)
         fprintf(stdout, "Records created successfully\n");
     }
     sqlite3_close(db);
+}
+
+void Student::display() {
+	cout << "Student Details are as follows " << endl;
+	cout << "Student ID : " << getID() << endl;
+	cout << "Name : " << getName() << endl;
+	cout << "Email:" << getEmail() << endl;
+	cout << "Phone Number :" << getPhoneNumber() << endl;
+	cout << "DOB : " ;
+    getDate().display() ;
+    cout << endl;
 }

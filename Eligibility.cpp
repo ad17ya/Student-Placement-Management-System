@@ -3,6 +3,7 @@
 #include <cstring>
 #include <string>
 #include <vector>
+#include <map>
 using namespace std;
 
 Eligibility::Eligibility(double cgpa, int lb, int db, int yP, int yG, string skillSet) : CGPA(cgpa), liveBackLog(lb), deadBackLog(db), yearGap(yG), passingYear(yP)
@@ -77,7 +78,7 @@ void Eligibility::setCGPA(double cgpa)
 	CGPA = cgpa;
 }
 
-double const Eligibility::getCGPA()
+double Eligibility::getCGPA() const
 {
 	return CGPA;
 }
@@ -87,7 +88,7 @@ void Eligibility::setLiveBackLog(int lb)
 	liveBackLog = lb;
 }
 
-int const Eligibility::getLiveBackLog()
+int Eligibility::getLiveBackLog() const
 {
 	return liveBackLog;
 }
@@ -97,12 +98,12 @@ void Eligibility::setDeadBackLog(int db)
 	deadBackLog = db;
 }
 
-int const Eligibility::getDeadBackLog()
+int Eligibility::getDeadBackLog() const
 {
 	return deadBackLog;
 }
 
-int const Eligibility::getYearGap()
+int Eligibility::getYearGap() const
 {
 	return yearGap;
 }
@@ -115,4 +116,20 @@ void Eligibility::setYearGap(int yg)
 void Eligibility::addSkill(string skillName, string skillLevel)
 {
 	skillExpertiseMap[skillName] = stoi(skillLevel);
+}
+
+void Eligibility::display()
+{
+	cout << "Eligibility Criteria is " << endl;
+	cout << "CGPA : " << getCGPA() << endl;
+	cout << "Live Backlog : " << getLiveBackLog() << endl;
+	cout << "Dead Backlog : " << getDeadBackLog() << endl;
+	cout << "Passing year " << getYearGap() << endl;
+
+	cout << "Skills\tExpertise Level " << endl;
+	map<string, int>::iterator itr;
+
+	for (itr = skillExpertiseMap.begin(); itr != skillExpertiseMap.end(); ++itr) {
+		cout << itr->first << '\t' << itr->second << '\n';
+	}
 }

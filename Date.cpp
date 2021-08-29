@@ -1,4 +1,5 @@
 #include "Date.h"
+#include <iostream>
 
 Date::Date(int d, int m, int y) : day(d), month(m), year(y)
 {
@@ -32,4 +33,8 @@ int Date::getMonth()
 int Date::getYear()
 {
 	return year;
+}
+
+void Date::display() {
+	std::cout << getDay() << "/" << getMonth() << "/" << getYear() << std::endl;
 }

@@ -23,13 +23,17 @@ public:
 	void setEmail(string);
 	void setPhoneNumber(string);
 	void setOffer(Offer);
-	string const getName();
-	string const getEmail();
-	string const getPhoneNumber();
-	vector<Offer> const getOffers();
+
+	string getName() const;
+	string getEmail() const;
+	string getPhoneNumber() const;
+
+	vector<Offer> getOffers();
 
 	void setPlacedStudents(set<int>, int);
 	void showAppliedStudents(int);
+
+	void display();
 
 	~Company() = default;									//Destructor
 };

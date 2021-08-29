@@ -31,22 +31,29 @@ void College::setPhoneNumber(string pn)
 	phoneNumber = pn;
 }
 
-string const College::getName()
+
+// Getters
+
+vector<Student>& College::getStudent() {
+	return studentList;
+}
+
+string College::getName() const
 {
 	return collegeName;
 }
 
-int const College::getCollegeCode()
+int College::getCollegeCode() const 
 {
 	return collegeCode;
 }
 
-string const College::getEmail()
+string College::getEmail() const 
 {
 	return collegeEmail;
 }
 
-string const College::getPhoneNumber()
+string College::getPhoneNumber() const 
 {
 	return phoneNumber;
 }
@@ -152,4 +159,13 @@ void College::updateStudentPlacedStatus()
 
 	// Close sqlite
 	sqlite3_close(DB);
+}
+
+
+void College::display() {
+	cout << "College Details are as follows " << endl;
+	cout << "College Code : " << getCollegeCode() << endl;
+	cout << "Name :" << getName() << endl;
+	cout << "Email:" << getEmail() << endl;
+	cout << "Phone Number :" << getPhoneNumber() << endl;
 }

@@ -30,12 +30,16 @@ public:
 	void setDeadline(Date);
 	void setEligibility(Eligibility);
 
-	string const getJobRole();
-	string const getJobLocation();
-	float const getPackage();
-	float const getBond();
-	Date const getDeadline();
-	Eligibility const getEligibility();
+	vector<College>& getCollege();
+	string getJobRole() const;
+	string getJobLocation() const;
+	float getPackage() const;
+	float getBond() const;
+	Date getDeadline() const;
+
+	Eligibility getEligibility() const;
+
+	void display();
 
 	~Offer() = default;														//Destructor
 };

@@ -13,4 +13,5 @@ public:
 	int getDay();
 	int getMonth();
 	int getYear();
+	void display();
 };

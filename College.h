@@ -26,14 +26,17 @@ public:
 	void setEmail(string);
 	void setPhoneNumber(string);
 
-	string const getName();
-	int const getCollegeCode();
-	string const getEmail();
-	string const getPhoneNumber();
+	vector<Student>& getStudent();
+	string getName() const;
+	int getCollegeCode() const;
+	string getEmail() const;
+	string getPhoneNumber() const;
 
 	void verifyStudent();
 	void viewEnrolledStudents(); // 
 	void updateStudentPlacedStatus(); // Update placement status from temporary table to college database
+
+	void display();
 
 	//Destructor
 	~College() = default;
@@ -45,9 +48,13 @@ public:
 // static and dynamic
 // debugging mode and release mode
 // multithreading race condition and deadlock
-// make and cmake
 
 // Documentation
 // Database diagram
 // Code snippet and output
 // Future scope - UI and web-based app
+
+
+// DONE
+
+// make and cmake

@@ -67,33 +67,52 @@ void Offer::setEligibility(Eligibility criteria)
 	eligibilityCriteria = criteria;
 }
 
+
 //getter methods
-string const Offer::getJobRole()
+
+vector<College>& Offer::getCollege() {
+	return collgeList;
+}
+
+string Offer::getJobRole() const 
 {
 	return jobRole;
 }
 
-string const Offer::getJobLocation()
+string Offer::getJobLocation() const 
 {
 	return jobLocation;
 }
 
-float const Offer::getPackage()
+float Offer::getPackage() const 
 {
 	return package;
 }
 
-float const Offer::getBond()
+float Offer::getBond() const 
 {
 	return bond;
 }
 
-Date const Offer::getDeadline()
+Date Offer::getDeadline() const 
 {
 	return applicationDeadline;
 }
 
-Eligibility const Offer::getEligibility()
+Eligibility Offer::getEligibility() const 
 {
 	return eligibilityCriteria;
+}
+
+void Offer::display() {
+	cout << "Offer Details are as follows " << endl;
+	cout << "Job Role :" << getJobRole() << endl;
+	cout << "Job Location:" << getJobLocation() << endl;
+	cout << "Package :" << getPackage() << endl;
+	cout << "Bond: " << getBond() << endl;
+	cout << "Application deadline : "; 
+	getDeadline().display();
+	cout << endl;
+
+	getEligibility().display();
 }

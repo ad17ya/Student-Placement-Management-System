@@ -51,22 +51,22 @@ void Company::setOffer(Offer of)
 }
 
 //getter methods
-string const Company::getName()
+string Company::getName() const 
 {
 	return companyName;
 }
 
-string const Company::getEmail()
+string Company::getEmail() const 
 {
 	return companyEmail;
 }
 
-string const Company::getPhoneNumber()
+string Company::getPhoneNumber() const 
 {
 	return phoneNumber;
 }
 
-vector<Offer> const Company::getOffers()
+vector<Offer> Company::getOffers()
 {
 	return offers;
 }
@@ -86,8 +86,12 @@ void Company::setPlacedStudents(set<int> studentIdList, int offerId) {
 			throw exit;
 
 		for (itr = studentIdList.begin(); itr != studentIdList.end(); itr++) {
-			//temporary table
-			query = "UPDATE COLLEGE_INTERMEDIATESTUDENTSTATUS SET STATUS = 1 WHERE OFFERID_ID='%d' and STUDENTID_ID='%d'", offerId, * itr;
+			// //temporary table
+			// query = "UPDATE COLLEGE_INTERMEDIATESTUDENTSTATUS SET STATUS = 1 WHERE OFFERID_ID='%d' and STUDENTID_ID='%d'", offerId, * itr;
+			// int rc = sqlite3_exec(DB, query.c_str(), NULL, 0, &messageError);
+
+			query = "UPDATE COLLEGE_INTERMEDIATESTUDENTSTATUS SET STATUS = 1 WHERE OFFERID_ID=" + 
+			to_string(offerId) + " and STUDENTID_ID=" + to_string(* itr);
 			int rc = sqlite3_exec(DB, query.c_str(), NULL, 0, &messageError);
 
 			if (rc != SQLITE_OK)
@@ -133,8 +137,11 @@ void Company::showAppliedStudents(int offerId) {
 		if (exit)
 			throw exit;
 
-		query = "SELECT CI.STUDENTID_ID,AU.FIRSTNAME,AU.LASTNAME FROM COLLEGE_INTERMEDIATESTUDENTSTATUS CI,AUTH_USER AU WHERE CI.STUDENTID_ID=AU.STUDENTID_ID AND CI.OFFERID_ID = '%d'", offerId;
+		query = "SELECT CI.STUDENTID_ID,AU.FIRSTNAME,AU.LASTNAME FROM COLLEGE_INTERMEDIATESTUDENTSTATUS CI,AUTH_USER AU WHERE CI.STUDENTID_ID=AU.STUDENTID_ID AND CI.OFFERID_ID =" + to_string(offerId);
 		int rc = sqlite3_exec(DB, query.c_str(), callback, NULL, &messageError);
+
+		// query = "SELECT CI.STUDENTID_ID,AU.FIRSTNAME,AU.LASTNAME FROM COLLEGE_INTERMEDIATESTUDENTSTATUS CI,AUTH_USER AU WHERE CI.STUDENTID_ID=AU.STUDENTID_ID AND CI.OFFERID_ID = '%d'", offerId;
+		// int rc = sqlite3_exec(DB, query.c_str(), callback, NULL, &messageError);
 		if (rc != SQLITE_OK)
 			throw (short)1;
 	}
@@ -148,4 +155,11 @@ void Company::showAppliedStudents(int offerId) {
 	}
 	
 	sqlite3_close(DB);
+}
+
+void Company::display() {
+	cout << "Company Details are as follows " << endl;
+	cout << "Name :" << getName() << endl;
+	cout << "Email:" << getEmail() << endl;
+	cout << "Phone Number :" << getPhoneNumber() << endl;
 }

@@ -18,18 +18,29 @@ private:
 	map<string, int> skillExpertiseMap; // mapping between skill(c++, java) and its respective level (in advanced, beginer)
 
 public:
+
+	// Constructors
 	Eligibility(double, int, int, int, int, string);
 	Eligibility();
 	Eligibility(const Eligibility &);
+
+	// Operator overloads
 	void operator=(const Eligibility &);
 	bool operator==(const Eligibility &e) const;
+
+	// Getters
+	double getCGPA() const;
+	int getLiveBackLog() const;
+	int getDeadBackLog() const;
+	int getYearGap() const;
+
+	// Setters
 	void setCGPA(double);
-	double const getCGPA();
 	void setLiveBackLog(int);
-	int const getLiveBackLog();
 	void setDeadBackLog(int);
-	int const getDeadBackLog();
-	int const getYearGap();
 	void setYearGap(int);
+
 	void addSkill(string, string);
+
+	void display();
 };
