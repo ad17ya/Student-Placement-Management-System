@@ -1,0 +1,3 @@
+/home/aditya/work/projects/student-placement/anothercode/build/CMakeFiles/rebuild_cache.dir
+/home/aditya/work/projects/student-placement/anothercode/build/CMakeFiles/edit_cache.dir
+/home/aditya/work/projects/student-placement/anothercode/build/CMakeFiles/Placement-Management-System.dir
