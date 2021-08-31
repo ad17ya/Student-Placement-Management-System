@@ -31,198 +31,233 @@ int main()
 
         switch (userChoice)
         {
-        case 1:
-            cout << "1.Add Company Info" << endl;
-            cout << "2.Modify Company Info" << endl;
-            cout << "3.View Company Info" << endl;
-            cout << "4.View enrolled students" << endl;
-            cout << "5.Add offer" << endl;
-            cout << "6.Modify Offer" << endl;
-            cout << "7.View All Offers" << endl;
-            cout << "8.Search Offer" << endl;
-            cin >> companyChoice;
-
-            switch (companyChoice)
-            {
             case 1:
-                /* Add company info */
+                cout << "1.Add Company Info" << endl;
+                cout << "2.Modify Company Info" << endl;
+                cout << "3.View Company Info" << endl;
+                cout << "4.View enrolled students" << endl;
+                cout << "5.Add offer" << endl;
+                cout << "6.Modify Offer" << endl;
+                cout << "7.View All Offers" << endl;
+                cout << "8.Search Offer" << endl;
+                cin >> companyChoice;
+
+                switch (companyChoice)
+                {
+                    case 1:
+                        /* Add company info */
+                        break;
+                    case 2:
+                        /* Modify company info */
+                        break;
+                    case 3:
+                        /* Displays company info */
+                        c->display();
+                        break;
+                    case 4:
+                        /* Shows enrolled students */
+                        c->showAppliedStudents(int);
+                        break;
+                    case 5:
+                        /* Add new offer */
+                        cout << "Enter Offer Details\n";
+                        cout << "Job Role : \n";
+                        cin >> role;
+                        cout << "Job Location : \n";
+                        cin >> location;
+                        cout << "Package (CTC) : \n";
+                        cin >> package;
+                        cout << "Bond (Years) : ";
+                        cin >> bond;
+                        cout << "Enter Application Deadline Date: ";
+                        cout << "Enter dd ";
+                        cin >> dd;
+                        cout << "Enter mm ";
+                        cin >> mm;
+                        cout << "Enter yyyy ";
+                        cin >> yyyy;
+
+                        cout << "Enter Minimum CGPA \n";
+                        cin >> cgpa;
+                        cout << "Enter Live and Dead Backlog limit \n";
+                        cin >> liveBacklog >> deadBacklog;
+                        cout << "Enter Passing Year \n";
+                        cin >> passYear;
+                        cout << "Enter Year Gap \n";
+                        cin >> yearGap;
+
+                        skill = "C++:1,Java:2";
+
+                        c->setOffer(Offer(role, location, package, bond, Date(dd, mm, yyyy), Eligibility(cgpa, liveBacklog, deadBacklog, passYear, yearGap, skill), vector<College>()));
+                        break;
+                    case 6:
+                        /* Modify offer */
+                        break;
+                    case 7:
+                        /* View all offers */
+                        /* display offer vector after initializing from database */
+                        break;
+                    case 8:
+                        // search offer
+                        break;
+                    default:
+                        cout << "Invalid choice " << endl;
+                        break;
+                }
                 break;
+
             case 2:
-                /* Modify company info */
+                cout << "1. Insert " << endl;
+                cout << "2. Modify " << endl;
+                cout << "3. Student Verification " << endl;
+                cout << "4. Company Verification " << endl;
+                cout << "5. View College info " << endl;
+                cout << "6. Search Colleges " << endl;
+                cout << "7. View Enrolled students " << endl;
+                cout << "8. View placed students " << endl;
+                cin >> collegeChoice;
+
+                switch (collegeChoice)
+                {
+                    case 1:
+                        /* Add college info */
+                        break;
+                    case 2:
+                        /* Modify college info */
+                        break;
+                    case 3:
+                        /* Student verification */
+                        break;
+                    case 4:
+                        /* Company verification */
+                        break;
+                    case 5:
+                        /* View college info */
+                        break;
+                    case 6:
+                        /* Search College */
+                        break;
+                    case 7:
+                        /* view enrolled students */
+                        break;
+                    case 8:
+                        /* view placed students */
+                        break;
+                    default:
+                        cout << "Invalid choice " << endl;
+                        break;
+                }
                 break;
+
             case 3:
-                /* Displays company info */
-                c->display();
+                cout << "1. Insert " << endl;
+                cout << "2. Modify " << endl;
+                cout << "3. Send for verification " << endl;
+                cout << "4. View eligible offers " << endl;
+                cout << "5. Apply for offers " << endl;
                 break;
-            case 4:
-                /* Shows enrolled students */
-                c->showAppliedStudents(int);
-                break;
-            case 5:
-                /* Add new offer */
-                cout << "Enter Offer Details\n";
-                cout << "Job Role : \n";
-                cin >> role;
-                cout << "Job Location : \n";
-                cin >> location;
-                cout << "Package (CTC) : \n";
-                cin >> package;
-                cout << "Bond (Years) : ";
-                cin >> bond;
-                cout << "Enter Application Deadline Date: ";
-                cout << "Enter dd ";
-                cin >> dd;
-                cout << "Enter mm ";
-                cin >> mm;
-                cout << "Enter yyyy ";
-                cin >> yyyy;
 
-                cout << "Enter Minimum CGPA \n";
-                cin >> cgpa;
-                cout << "Enter Live and Dead Backlog limit \n";
-                cin >> liveBacklog >> deadBacklog;
-                cout << "Enter Passing Year \n";
-                cin >> passYear;
-                cout << "Enter Year Gap \n";
-                cin >> yearGap;
+                switch (studentChoice)
+                {
+                    case 1: /*Add student data function call*/
+                        break;
 
-                skill = "C++:1,Java:2";
+                    case 2: /*Update data function call*/
+                        break;
 
-                c->setOffer(Offer(role, location, package, bond, Date(dd, mm, yyyy), Eligibility(cgpa, liveBacklog, deadBacklog, passYear, yearGap, skill), vector<College>()));
-                break;
-            case 6:
-                /* Modify offer */
-                break;
-            case 7:
-                /* View all offers */
-                /* display offer vector after initializing from database */
-                break;
-            case 8:
-                // search offer
-                break;
+                    case 3:
+                        /*send data for verification?*/
+                        cout << "Sent for verification" ;
+                        break;
+
+                    case 4: /*view offers function call*/
+                        break;
+
+                    case 5: /*Apply for offers*/
+                        break;
+
+                    default:
+                        cout << "Invalid choice " << endl;
+                        break;
+                }
+
             default:
                 cout << "Invalid choice " << endl;
                 break;
-            }
-            break;
-
-        case 2:
-            cout << "1. Insert " << endl;
-            cout << "2. Modify " << endl;
-            cout << "3. Student Verification " << endl;
-            cout << "4. Company Verification " << endl;
-            cout << "5. View College info " << endl;
-            cout << "6. Search Colleges " << endl;
-            cout << "7. View Enrolled students " << endl;
-            cout << "8. View placed students " << endl;
-            cin >> collegeChoice;
-
-            switch (collegeChoice)
-            {
-            case 1:
-                /* Add college info */
-                break;
-            case 2:
-                /* Modify college info */
-                break;
-            case 3:
-                /* Student verification */
-                break;
-            case 4:
-                /* Company verification */
-                break;
-            case 5:
-                /* View college info */
-                break;
-            case 6:
-                /* Search College */
-                break;
-            case 7:
-                /* view enrolled students */
-                break;
-            case 8:
-                /* view placed students */
-                break;
-            default:
-                cout << "Invalid choice " << endl;
-                break;
-            }
-            break;
         }
-
-        break;
-
-    case 3:
-        cout << "1. Insert " << endl;
-        cout << "2. Modify " << endl;
-        cout << "3. Send for verification " << endl;
-        cout << "4. View eligible offers " << endl;
-        cout << "5. Apply for offers " << endl;
-        break;
-
-        switch (studentChoice)
-        {
-        case 1: /*Add student data function call*/
-            break;
-
-        case 2: /*Update data function call*/
-            break;
-
-        case 3: 
-            /*send data for verification?*/
-            cout << "Sent for verification" ;
-            break;
-
-        case 4: /*view offers function call*/
-            break;
-
-        case 5: /*Apply for offers*/
-            break;
-
-        default:
-            cout << "Invalid choice " << endl;
-            break;
-        }
-
-    default:
-        cout << "Invalid choice " << endl;
-        break;
     }
 }
 
 
 /*
 
-Common
-    1. Display all data
-Student
-    1. Display academic details
-    2. Enter student data
-    3. Show applicable offers
-    4. Apply for offer
+   Common
+   1. Display all data
+   Student
+   1. Display academic details
+   2. Enter student data
+   3. Show applicable offers
+   4. Apply for offer
 
-College
-    1. Enter college information
-    2. Add student
-    3. View enrolled students
-    4. Update student placement status from temporary table to college database
+   College
+   1. Enter college information
+   2. Add student
+   3. View enrolled students
+   4. Update student placement status from temporary table to college database
 
-Company
-    1. Enter company information
-    2. Add offers
-    3. Show current offers
-    4. Send recruited student list to college for respective offer
-    5. Show applied students for their offer
+   Company
+   1. Enter company information
+   2. Add offers
+   3. Show current offers
+   4. Send recruited student list to college for respective offer
+   5. Show applied students for their offer
 
 */
 
 /*
 
-Azure
-1. Security - policy and roles
-2. Compute - Create EC2 instances && deployment
-3. Elastic load balancer -> Autoscaling -
-4. DNS
-5. Storage - Bucket/DB
+   Azure
+   1. Security - policy and roles
+   2. Compute - Create EC2 instances && deployment
+   3. Elastic load balancer -> Autoscaling -
+   4. DNS
+   5. Storage - Bucket/DB
+
+*/
+
+/*
+   Select type - User
+   1. company
+   2. college
+   3. student
+
+   Company
+   1. Insert
+   2. Modify
+   3. View company info
+   5. View enrolled students
+   4. Goto offers
+   5. Insert
+   6. Modify
+   7. View all offers
+   8. Search for offer
+
+   College
+   1. Insert
+   2. Modify
+   3. Student Verification
+   4. Company Verification
+   5. View College info
+   6. Search Colleges
+   7. View Enrolled students
+   8. View placed students
+
+
+   Student
+   1. Insert
+   2. Modify
+   3. Send for verification
+   4. View eligible offers
+   5. Apply for offers
 
 */

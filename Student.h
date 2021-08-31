@@ -52,38 +52,3 @@ public:
 	static int callback(void *, int, char **, char **);
 	void display();
 };
-
-/*
-Select type - User
-1. company
-2. college
-3. student
-
-Company
-1. Insert
-2. Modify
-3. View company info
-5. View enrolled students
-4. Goto offers
-5. Insert
-6. Modify 
-7. View all offers
-8. Search for offer
-
-College
-1. Insert
-2. Modify
-3. Student Verification
-4. Company Verification
-5. View College info
-6. Search Colleges
-7. View Enrolled students
-8. View placed students
-
-
-Student
-1. Insert
-2. Modify
-3. Send for verification
-4. View eligible offers
-5. Apply for offers
