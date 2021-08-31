@@ -89,15 +89,17 @@ int main()
     double cgpa;
     int liveBacklog, deadBacklog, passYear, yearGap, package, bond, dd, mm, yyyy;
     string skill, collegeName, collegeEmail, collegePhone, studentName, studentEmail, studentPhoneNumber, studentDepartment;
-    while (1)
+
+    while(1)
     {
-        cout << " Student Placement Management System" << endl;
-        cout << "1-Company \n2-Offer Menu\n3-College \n4-Student\n" ;
+        cout << "====" << endl;
+        cout << "Student Placement Management System" << endl;
+        cout << "1-Company \n2-Offer Menu\n3-College \n4-Student\n\n" ;
         cin >> choice;
         switch (choice)
         {
         case 1:
-            cout << "1-View Company Information, 2 - add offer\n";
+            cout << "1-View Company Info \n2-Add new Offer\n";
             cin >> companyChoice;
             if (companyChoice == 1)
             {
@@ -105,29 +107,35 @@ int main()
             }
             else if (companyChoice == 2)
             {
-                cout << "enter offer information\n";
-                cout << "enter job role : ";
+                cout << "Enter Offer Details\n";
+                cout << "Job Role : \n";
                 cin >> role;
-                cout << "enter job location : ";
+                cout << "Job Location : \n";
                 cin >> location;
-                cout << "enter package : ";
+                cout << "Package (CTC) : \n";
                 cin >> package;
-                cout << "enter bond : ";
+                cout << "Bond (Years) : ";
                 cin >> bond;
-                cout << "enter last date to apply(dd/mm/yyyy) : ";
-                cin >> dd >> mm >> yyyy;
-                cout << "enter required cgpa\n";
+                cout << "Enter Application Deadline Date: ";
+                cout << "Enter dd "; cin >> dd;
+                cout << "Enter mm "; cin >> mm;
+                cout << "Enter yyyy "; cin >> yyyy;
+
+                cout << "Enter Minimum CGPA \n";
                 cin >> cgpa;
-                cout << "enter live and dead backlogs : ";
+                cout << "Enter Live and Dead Backlog limit \n";
                 cin >> liveBacklog >> deadBacklog;
-                cout << "enter passing year and acceptable year gap : ";
-                cin >> passYear >> yearGap;
-                skill = "c++:1,java:2";
-                c->setOffer(Offer(role, location, package, bond, Date(dd, mm, yyyy), Eligibility(cgpa, liveBacklog, deadBacklog, passYear, yearGap, skill), vector<College>()));
+                cout << "Enter Passing Year \n";
+                cin >> passYear;
+                cout << "Enter Year Gap \n";
+                cin >> yearGap;
+
+                skill = "C++:1,Java:2";
+                c->setOffer(Offer(role, location, package, bond, Date(dd, mm, yyyy), Eligibility(cgpa, liveBacklog, deadBacklog, passYear, yearGap, skill), vector<College>()), );
             }
             break;
         case 2:
-            cout << "1 - display details of offer, 2 - add college\n";
+            cout << "\n1-Display Offer Details \n2-Add College\n";
             cin >> offerChoice;
             if (offerChoice == 1)
             {
@@ -139,7 +147,7 @@ int main()
                     cout << count << endl;
                     count++;
                 }
-                cout << "enter offer index : ";
+                cout << "Enter Offer Index: \n";
                 cin >> offerChoice;
                 c->getOffers().at(offerChoice).display();
             }
@@ -153,12 +161,12 @@ int main()
                     cout << count << endl;
                     count++;
                 }
-                cout << "enter offer index : ";
+                cout << "Enter Offer Index : \n";
                 cin >> offerChoice;
-                cout << "Enter College information\n";
-                cout << "enter college name : ";
+                cout << "Enter College Information\n";
+                cout << "Enter College Name : \n";
                 cin >> collegeName;
-                cout << "enter college code : ";
+                cout << "enter college code : \n";
                 cin >> collegeCode;
                 cout << "enter college phone number : ";
                 cin >> collegePhone;
@@ -214,33 +222,33 @@ int main()
                     cout << count << endl;
                     count++;
                 }
-                cout << "enter college index : ";
+                cout << "Enter College Index : ";
                 cin >> collegeChoice;
-                cout << "enter student information\n";
-                cout << "enter student name : ";
+                cout << "Enter Student Information\n";
+                cout << "Enter Student Name : ";
                 cin >> studentName;
-                cout << "enter student id : ";
+                cout << "Enter Student Id : ";
                 cin >> studentId;
-                cout << "enter student email : ";
+                cout << "Enter Student Email : ";
                 cin >> studentEmail;
-                cout << "enter student phone number : ";
+                cout << "Enter Student Phone Number : ";
                 cin >> studentPhoneNumber;
-                cout << "enter student DOB(dd/mm/yyyy) : ";
+                cout << "Enter Student DOB(dd/mm/yyyy) : ";
                 cin >> dd >> mm >> yyyy;
-                cout << "enter student department : ";
+                cout << "Enter student department : ";
                 cin >> studentDepartment;
-                cout << "enter student cgpa\n";
+                cout << "Enter student cgpa\n";
                 cin >> cgpa;
-                cout << "enter live and dead backlogs : ";
+                cout << "Enter live and dead backlogs : \n";
                 cin >> liveBacklog >> deadBacklog;
-                cout << "enter passing year and student year gap : ";
+                cout << "Enter passing year and student year gap : \n";
                 cin >> passYear >> yearGap;
                 skill = "c++:1,java:2";
                 c->getOffers().at(offerChoice).getCollege().at(collegeChoice).addStudent(Student(studentName, studentId, studentEmail, studentPhoneNumber, Date(dd, mm, yyyy), studentDepartment, Eligibility(cgpa, liveBacklog, deadBacklog, passYear, yearGap, skill)));
             }
             break;
         case 4:
-            cout << "1 - view student information, 2 - add skill\n";
+            cout << "1-View Student Information\n2 - add skill\n";
             cin >> studentChoice;
             if (studentChoice == 1)
             {
@@ -316,15 +324,17 @@ int main()
         default:
             break;
         }
+
+        cout << "Do you want to continue ? " << endl;
     }
     return 0;
 }
 
 /*
 
-Common 
+Common
     1. Display all data
-Student 
+Student
     1. Display academic details
     2. Enter student data
     3. Show applicable offers
@@ -345,12 +355,12 @@ Company
 
 */
 
-/* 
+/*
 
-Azure 
-1. Security - policy and roles 
+Azure
+1. Security - policy and roles
 2. Compute - Create EC2 instances && deployment
-3. Elastic load balancer -> Autoscaling - 
+3. Elastic load balancer -> Autoscaling -
 4. DNS
 5. Storage - Bucket/DB
 

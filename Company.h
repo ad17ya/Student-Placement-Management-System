@@ -9,6 +9,7 @@ using namespace std;
 class Company
 {
 private:
+	int companyID;
 	string companyName;
 	string companyEmail;
 	string phoneNumber;
@@ -27,6 +28,7 @@ public:
 	string getName() const;
 	string getEmail() const;
 	string getPhoneNumber() const;
+	int getComapanyID() const;
 
 	vector<Offer> getOffers();
 

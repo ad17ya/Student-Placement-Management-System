@@ -32,6 +32,8 @@ void Offer::operator=(const Offer& of) {
 
 void Offer::addCollege(College collgeObj) {
 	collgeList.push_back(collgeObj);
+
+	/* Insert in college table */
 }
 
 //setter methods
@@ -74,32 +76,32 @@ vector<College>& Offer::getCollege() {
 	return collgeList;
 }
 
-string Offer::getJobRole() const 
+string Offer::getJobRole() const
 {
 	return jobRole;
 }
 
-string Offer::getJobLocation() const 
+string Offer::getJobLocation() const
 {
 	return jobLocation;
 }
 
-float Offer::getPackage() const 
+float Offer::getPackage() const
 {
 	return package;
 }
 
-float Offer::getBond() const 
+float Offer::getBond() const
 {
 	return bond;
 }
 
-Date Offer::getDeadline() const 
+Date Offer::getDeadline() const
 {
 	return applicationDeadline;
 }
 
-Eligibility Offer::getEligibility() const 
+Eligibility Offer::getEligibility() const
 {
 	return eligibilityCriteria;
 }
@@ -109,10 +111,12 @@ void Offer::display() {
 	cout << "Job Role :" << getJobRole() << endl;
 	cout << "Job Location:" << getJobLocation() << endl;
 	cout << "Package :" << getPackage() << endl;
-	cout << "Bond: " << getBond() << endl;
-	cout << "Application deadline : "; 
+    cout << "Bond:" << getBond() << endl;
+	cout << "Application deadline : ";
 	getDeadline().display();
+    getDeadline().display();
 	cout << endl;
 
 	getEligibility().display();
+    getEligibility().display();
 }

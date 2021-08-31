@@ -44,24 +44,57 @@ void Company::setPhoneNumber(string pnumber)
 	phoneNumber = pnumber;
 }
 
-void Company::setOffer(Offer of)
+void Company::setOffer(Offer of, int companyId)
 {
 	offers.push_back(of);
 	std::cout << "Offer Set" << std::endl;
+
+	sqlite3* DB;
+	int exit = 0;
+	exit = sqlite3_open("campusDatabase.db" , &DB);
+
+	char* messageError;
+	string query;
+
+	try {
+		if (exit)
+			throw exit;
+
+		query = "INSERT INTO OFFER VALUES(OF.";
+		int rc = sqlite3_exec(DB, query.c_str(), callback, NULL, &messageError);
+
+		if (rc != SQLITE_OK)
+			throw (short)1;
+	}
+
+	catch (int exit) {
+		std::cerr << "Error open DB " << sqlite3_errmsg(DB) << endl;
+	}
+
+	catch (short i) {
+		cout << "Error in showing applied student :" << messageError;
+	}
+
+	sqlite3_close(DB);
+
 }
 
 //getter methods
-string Company::getName() const 
+int Company::getComapanyID() const {
+
+}
+
+string Company::getName() const
 {
 	return companyName;
 }
 
-string Company::getEmail() const 
+string Company::getEmail() const
 {
 	return companyEmail;
 }
 
-string Company::getPhoneNumber() const 
+string Company::getPhoneNumber() const
 {
 	return phoneNumber;
 }
@@ -75,9 +108,9 @@ void Company::setPlacedStudents(set<int> studentIdList, int offerId) {
 	char* messageError;
 	sqlite3* DB;
 	int exit = 0;
-	exit = sqlite3_open("example.db", &DB);
+	exit = sqlite3_open(".db", &DB);
 
-	
+
 	set<int> ::iterator itr;
 	string query;
 
@@ -90,7 +123,7 @@ void Company::setPlacedStudents(set<int> studentIdList, int offerId) {
 			// query = "UPDATE COLLEGE_INTERMEDIATESTUDENTSTATUS SET STATUS = 1 WHERE OFFERID_ID='%d' and STUDENTID_ID='%d'", offerId, * itr;
 			// int rc = sqlite3_exec(DB, query.c_str(), NULL, 0, &messageError);
 
-			query = "UPDATE COLLEGE_INTERMEDIATESTUDENTSTATUS SET STATUS = 1 WHERE OFFERID_ID=" + 
+			query = "UPDATE COLLEGE_INTERMEDIATESTUDENTSTATUS SET STATUS = 1 WHERE OFFERID_ID=" +
 			to_string(offerId) + " and STUDENTID_ID=" + to_string(* itr);
 			int rc = sqlite3_exec(DB, query.c_str(), NULL, 0, &messageError);
 
@@ -126,7 +159,7 @@ static int callback(void* data, int argc, char** argv, char** azColName)
 void Company::showAppliedStudents(int offerId) {
 	sqlite3* DB;
 	int exit = 0;
-	exit = sqlite3_open("db.sqlite3" , &DB);
+	exit = sqlite3_open("campusDatabase.db" , &DB);
 	string data("CALLBACK FUNCTION");
 
 
@@ -153,7 +186,7 @@ void Company::showAppliedStudents(int offerId) {
 	catch (short i) {
 		cout << "Error in showing applied student :" << messageError;
 	}
-	
+
 	sqlite3_close(DB);
 }
 
