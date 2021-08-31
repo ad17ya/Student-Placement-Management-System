@@ -9,104 +9,57 @@
 #include "Date.h"
 #include "Offer.h"
 using namespace std;
-/*
-static int callback(void* data, int argc, char** argv, char** azColName)
-{
-	//fprintf(stderr, "%s: ", (const char*)data);
-
-	cout << "in call back\n";
-		//printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-	Eligibility* tempCriteria = new Eligibility(atof(argv[1]), atoi(argv[2]), atoi(argv[3]), 2021, atoi(argv[4]), string("cpp:1,java:2"));
-	Eligibility* studentAcademicDetails = new Eligibility(8.5, 0, 0, 2021, 0, string("cpp:1,java:2"));
-	cout << tempCriteria->getLiveBackLog() << "\n";
-	if (*(studentAcademicDetails) == *(tempCriteria)) {
-		(*(vector<int>*)data).push_back(atoi(argv[0]));
-		cout << "inside if\n";
-	}
-
-	delete studentAcademicDetails;
-	delete tempCriteria;
-	printf("\n");
-	return 0;
-}
-int main(int argc, char** argv)
-{
-	sqlite3* DB;
-	int exit = 0;
-	exit = sqlite3_open("campus.db", &DB);
-	//string data("CALLBACK FUNCTION");
-	vector<int> data;
-	string sql("select CO.id, CA.cgpa, CA.liveBacklog, CA.deadBacklog,CA.yearGap from Company_offer as CO inner join Company_criteria as CA on CO.id = CA.offerId_id;");
-	if (exit) {
-		std::cerr << "Error open DB " << sqlite3_errmsg(DB) << std::endl;
-		return (-1);
-	}
-	else
-		std::cout << "Opened Database Successfully!" << std::endl;
-
-	int rc = sqlite3_exec(DB, sql.c_str(), callback, (void*)&data, NULL);
-	for (auto it : data) {
-		cout << it << "\n";;
-	}
-	if (rc != SQLITE_OK)
-		cerr << "Error SELECT" << endl;
-	else {
-		cout << "Operation OK!" << endl;
-	}
-
-	sqlite3_close(DB);
-	return (0);
-}
-
-
-
-
-using namespace std;
-
-int main() {
-	Eligibility studentAcademicDetails(8.5, 0, 0, 2021, 0, string("cpp:1,java:2"));
-	Student s("abc", 101, "a@b", "lmn", Date(10, 10, 10), "xyz", studentAcademicDetails);
-	vector<int> off = s.getApplicableOffers();
-	s.apply(off[0]);
-	return 0;
-}
-
-*/
 
 int main()
 {
-    Company *c = new Company("Persistent", "ps@.com", "12345567", vector<Offer>());
+    Company *c = new Company("Persistent", "ps@email.com", "123123123", vector<Offer>());
 
-    //(c->getOffers().at(0)).addCollege(College("SCOE", 4023, "sc@.com", "1234566", vector<Student>()));
-    //(c->getOffers().at(0)).addCollege(College());
-    //cout << c->getOffers()[0].getCollege()[0].getName();
-    //(c->getOffers().at(0)).getCollege().at(0).addStudent(Student("name", 101, "st@.com", "1234567", Date(1, 1, 1), "CS", Eligibility()));
-    //cout << (c->getOffers().at(0)).getCollege().at(0).getStudent().at(0).getName();
+    int userChoice, companyChoice, collegeChoice, studentChoice;
 
-    int choice;
-    int companyChoice, offerChoice, collegeCode, collegeChoice, studentId, studentChoice;
+    int studentId;
     string role, location, skillName, skillLevel;
     double cgpa;
     int liveBacklog, deadBacklog, passYear, yearGap, package, bond, dd, mm, yyyy;
     string skill, collegeName, collegeEmail, collegePhone, studentName, studentEmail, studentPhoneNumber, studentDepartment;
 
-    while(1)
+    while (1)
     {
-        cout << "====" << endl;
+        cout << "===" << endl;
         cout << "Student Placement Management System" << endl;
-        cout << "1-Company \n2-Offer Menu\n3-College \n4-Student\n\n" ;
-        cin >> choice;
-        switch (choice)
+        cout << "1-Company \n2-College\n3-Student \n\n";
+        cin >> userChoice;
+
+        switch (userChoice)
         {
         case 1:
-            cout << "1-View Company Info \n2-Add new Offer\n";
+            cout << "1.Add Company Info" << endl;
+            cout << "2.Modify Company Info" << endl;
+            cout << "3.View Company Info" << endl;
+            cout << "4.View enrolled students" << endl;
+            cout << "5.Add offer" << endl;
+            cout << "6.Modify Offer" << endl;
+            cout << "7.View All Offers" << endl;
+            cout << "8.Search Offer" << endl;
             cin >> companyChoice;
-            if (companyChoice == 1)
+
+            switch (companyChoice)
             {
+            case 1:
+                /* Add company info */
+                break;
+            case 2:
+                /* Modify company info */
+                break;
+            case 3:
+                /* Displays company info */
                 c->display();
-            }
-            else if (companyChoice == 2)
-            {
+                break;
+            case 4:
+                /* Shows enrolled students */
+                c->showAppliedStudents(int);
+                break;
+            case 5:
+                /* Add new offer */
                 cout << "Enter Offer Details\n";
                 cout << "Job Role : \n";
                 cin >> role;
@@ -117,9 +70,12 @@ int main()
                 cout << "Bond (Years) : ";
                 cin >> bond;
                 cout << "Enter Application Deadline Date: ";
-                cout << "Enter dd "; cin >> dd;
-                cout << "Enter mm "; cin >> mm;
-                cout << "Enter yyyy "; cin >> yyyy;
+                cout << "Enter dd ";
+                cin >> dd;
+                cout << "Enter mm ";
+                cin >> mm;
+                cout << "Enter yyyy ";
+                cin >> yyyy;
 
                 cout << "Enter Minimum CGPA \n";
                 cin >> cgpa;
@@ -131,204 +87,109 @@ int main()
                 cin >> yearGap;
 
                 skill = "C++:1,Java:2";
-                c->setOffer(Offer(role, location, package, bond, Date(dd, mm, yyyy), Eligibility(cgpa, liveBacklog, deadBacklog, passYear, yearGap, skill), vector<College>()), );
+
+                c->setOffer(Offer(role, location, package, bond, Date(dd, mm, yyyy), Eligibility(cgpa, liveBacklog, deadBacklog, passYear, yearGap, skill), vector<College>()));
+                break;
+            case 6:
+                /* Modify offer */
+                break;
+            case 7:
+                /* View all offers */
+                /* display offer vector after initializing from database */
+                break;
+            case 8:
+                // search offer
+                break;
+            default:
+                cout << "Invalid choice " << endl;
+                break;
             }
             break;
+
         case 2:
-            cout << "\n1-Display Offer Details \n2-Add College\n";
-            cin >> offerChoice;
-            if (offerChoice == 1)
-            {
-                int count = 0;
-                for (auto it : c->getOffers())
-                {
-                    cout << it.getJobRole() << endl;
-                    cout << it.getJobLocation() << endl;
-                    cout << count << endl;
-                    count++;
-                }
-                cout << "Enter Offer Index: \n";
-                cin >> offerChoice;
-                c->getOffers().at(offerChoice).display();
-            }
-            else if (offerChoice == 2)
-            {
-                int count = 0;
-                for (auto it : c->getOffers())
-                {
-                    cout << it.getJobRole() << endl;
-                    cout << it.getJobLocation() << endl;
-                    cout << count << endl;
-                    count++;
-                }
-                cout << "Enter Offer Index : \n";
-                cin >> offerChoice;
-                cout << "Enter College Information\n";
-                cout << "Enter College Name : \n";
-                cin >> collegeName;
-                cout << "enter college code : \n";
-                cin >> collegeCode;
-                cout << "enter college phone number : ";
-                cin >> collegePhone;
-                cout << "enter college email : ";
-                cin >> collegeEmail;
-                (c->getOffers().at(offerChoice)).addCollege(College(collegeName, collegeCode, collegeEmail, collegePhone, vector<Student>()));
-            }
-            break;
-        case 3:
-            cout << "1 - view college information, 2 - add student\n";
+            cout << "1. Insert " << endl;
+            cout << "2. Modify " << endl;
+            cout << "3. Student Verification " << endl;
+            cout << "4. Company Verification " << endl;
+            cout << "5. View College info " << endl;
+            cout << "6. Search Colleges " << endl;
+            cout << "7. View Enrolled students " << endl;
+            cout << "8. View placed students " << endl;
             cin >> collegeChoice;
-            if (collegeChoice == 1)
+
+            switch (collegeChoice)
             {
-                int count = 0;
-                for (auto it : c->getOffers())
-                {
-                    cout << it.getJobRole() << endl;
-                    cout << it.getJobLocation() << endl;
-                    cout << count << endl;
-                    count++;
-                }
-                cout << "enter offer index : ";
-                cin >> offerChoice;
-                count = 0;
-                for (auto it : c->getOffers().at(offerChoice).getCollege())
-                {
-                    cout << it.getName() << endl;
-                    cout << it.getCollegeCode() << endl;
-                    cout << count << endl;
-                    count++;
-                }
-                cout << "enter college index : ";
-                cin >> collegeChoice;
-                c->getOffers().at(offerChoice).getCollege().at(collegeChoice).display();
+            case 1:
+                /* Add college info */
+                break;
+            case 2:
+                /* Modify college info */
+                break;
+            case 3:
+                /* Student verification */
+                break;
+            case 4:
+                /* Company verification */
+                break;
+            case 5:
+                /* View college info */
+                break;
+            case 6:
+                /* Search College */
+                break;
+            case 7:
+                /* view enrolled students */
+                break;
+            case 8:
+                /* view placed students */
+                break;
+            default:
+                cout << "Invalid choice " << endl;
+                break;
             }
-            else if (collegeChoice == 2)
-            {
-                int count = 0;
-                for (auto it : c->getOffers())
-                {
-                    cout << it.getJobRole() << endl;
-                    cout << it.getJobLocation() << endl;
-                    cout << count << endl;
-                    count++;
-                }
-                cout << "enter offer index : ";
-                cin >> offerChoice;
-                count = 0;
-                for (auto it : c->getOffers().at(offerChoice).getCollege())
-                {
-                    cout << it.getName() << endl;
-                    cout << it.getCollegeCode() << endl;
-                    cout << count << endl;
-                    count++;
-                }
-                cout << "Enter College Index : ";
-                cin >> collegeChoice;
-                cout << "Enter Student Information\n";
-                cout << "Enter Student Name : ";
-                cin >> studentName;
-                cout << "Enter Student Id : ";
-                cin >> studentId;
-                cout << "Enter Student Email : ";
-                cin >> studentEmail;
-                cout << "Enter Student Phone Number : ";
-                cin >> studentPhoneNumber;
-                cout << "Enter Student DOB(dd/mm/yyyy) : ";
-                cin >> dd >> mm >> yyyy;
-                cout << "Enter student department : ";
-                cin >> studentDepartment;
-                cout << "Enter student cgpa\n";
-                cin >> cgpa;
-                cout << "Enter live and dead backlogs : \n";
-                cin >> liveBacklog >> deadBacklog;
-                cout << "Enter passing year and student year gap : \n";
-                cin >> passYear >> yearGap;
-                skill = "c++:1,java:2";
-                c->getOffers().at(offerChoice).getCollege().at(collegeChoice).addStudent(Student(studentName, studentId, studentEmail, studentPhoneNumber, Date(dd, mm, yyyy), studentDepartment, Eligibility(cgpa, liveBacklog, deadBacklog, passYear, yearGap, skill)));
-            }
-            break;
-        case 4:
-            cout << "1-View Student Information\n2 - add skill\n";
-            cin >> studentChoice;
-            if (studentChoice == 1)
-            {
-                int count = 0;
-                for (auto it : c->getOffers())
-                {
-                    cout << it.getJobRole() << endl;
-                    cout << it.getJobLocation() << endl;
-                    cout << count << endl;
-                    count++;
-                }
-                cout << "enter offer index : ";
-                cin >> offerChoice;
-                count = 0;
-                for (auto it : c->getOffers().at(offerChoice).getCollege())
-                {
-                    cout << it.getName() << endl;
-                    cout << it.getCollegeCode() << endl;
-                    cout << count << endl;
-                    count++;
-                }
-                cout << "enter college index : ";
-                cin >> collegeChoice;
-                count = 0;
-                for (auto it : c->getOffers().at(offerChoice).getCollege().at(collegeChoice).getStudent())
-                {
-                    cout << it.getID() << endl;
-                    cout << count << endl;
-                    count++;
-                }
-                cout << "enter student index\n";
-                cin >> studentChoice;
-                c->getOffers().at(offerChoice).getCollege().at(collegeChoice).getStudent().at(studentChoice).display();
-            }
-            else if (studentChoice == 2)
-            {
-                int count = 0;
-                for (auto it : c->getOffers())
-                {
-                    cout << it.getJobRole() << endl;
-                    cout << it.getJobLocation() << endl;
-                    cout << count << endl;
-                    count++;
-                }
-                cout << "enter offer index : ";
-                cin >> offerChoice;
-                count = 0;
-                for (auto it : c->getOffers().at(offerChoice).getCollege())
-                {
-                    cout << it.getName() << endl;
-                    cout << it.getCollegeCode() << endl;
-                    cout << count << endl;
-                    count++;
-                }
-                cout << "enter college index : ";
-                cin >> collegeChoice;
-                count = 0;
-                for (auto it : c->getOffers().at(offerChoice).getCollege().at(collegeChoice).getStudent())
-                {
-                    cout << it.getID() << endl;
-                    cout << count << endl;
-                    count++;
-                }
-                cout << "enter student index\n";
-                cin >> studentChoice;
-                cout << "enter skill name : ";
-                cin >> skillName;
-                cout << "enter skill expertise level (1 - beginer, 2 - intermediate, 3 - advanced) : ";
-                cin >> skillLevel;
-                c->getOffers().at(offerChoice).getCollege().at(collegeChoice).getStudent().at(studentChoice).getAcademicDetails().addSkill(skillName, skillLevel);
-            }
-            break;
-        default:
             break;
         }
 
-        cout << "Do you want to continue ? " << endl;
+        break;
+
+    case 3:
+        cout << "1. Insert " << endl;
+        cout << "2. Modify " << endl;
+        cout << "3. Send for verification " << endl;
+        cout << "4. View eligible offers " << endl;
+        cout << "5. Apply for offers " << endl;
+        break;
+
+        switch (studentChoice)
+        {
+        case 1: /*Add student data function call*/
+            break;
+
+        case 2: /*Update data function call*/
+            break;
+
+        case 3: 
+            /*send data for verification?*/
+            cout << "Sent for verification" ;
+            break;
+
+        case 4: /*view offers function call*/
+            break;
+
+        case 5: /*Apply for offers*/
+            break;
+
+        default:
+            cout << "Invalid choice " << endl;
+            break;
+        }
+
+    default:
+        cout << "Invalid choice " << endl;
+        break;
     }
-    return 0;
 }
+
 
 /*
 

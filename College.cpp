@@ -161,7 +161,6 @@ void College::updateStudentPlacedStatus()
 	sqlite3_close(DB);
 }
 
-
 void College::display() {
 	cout << "College Details are as follows " << endl;
 	cout << "College Code : " << getCollegeCode() << endl;
