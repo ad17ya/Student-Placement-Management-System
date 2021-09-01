@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/Placement-Management-System.dir/main.cpp.o -o Placement-Management-System   -L/home/aditya/work/projects/student-placement/anothercode  -Wl,-rpath,/home/aditya/work/projects/student-placement/anothercode ../lib_static_SPMS.a -lsqlite3 -l_dynamic_SPMS -lsqlite3 -l_dynamic_SPMS 

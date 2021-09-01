@@ -56,7 +56,7 @@ int main()
                         break;
                     case 4:
                         /* Shows enrolled students */
-                        c->showAppliedStudents(int);
+                        /* c->showAppliedStudents(int); */
                         break;
                     case 5:
                         /* Add new offer */
@@ -88,7 +88,7 @@ int main()
 
                         skill = "C++:1,Java:2";
 
-                        c->setOffer(Offer(role, location, package, bond, Date(dd, mm, yyyy), Eligibility(cgpa, liveBacklog, deadBacklog, passYear, yearGap, skill), vector<College>()));
+                        /* c->setOffer(Offer(role, location, package, bond, Date(dd, mm, yyyy), Eligibility(cgpa, liveBacklog, deadBacklog, passYear, yearGap, skill), vector<College>())); */
                         break;
                     case 6:
                         /* Modify offer */
