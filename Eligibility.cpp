@@ -9,10 +9,10 @@ using namespace std;
 Eligibility::Eligibility(double cgpa, int lb, int db, int yP, int yG, string skillSet) : CGPA(cgpa), liveBackLog(lb), deadBackLog(db), yearGap(yG), passingYear(yP)
 {
 	//skill1:level1,skill2:level2...
-	char *token;
-	const char *delim = ",";
-	char *next_token;
-	token = strtok(const_cast<char *>(skillSet.c_str()), delim);
+	char* token;
+	const char* delim = ",";
+	char* next_token;
+/*	token = strtok(const_cast<char*>(skillSet.c_str()), delim);
 	while (token != NULL)
 	{
 		string s(token);
@@ -20,11 +20,11 @@ Eligibility::Eligibility(double cgpa, int lb, int db, int yP, int yG, string ski
 		skillExpertiseMap[s.substr(0, pos)] = stoi(s.substr(pos + 1, string::npos));
 		token = strtok(NULL, delim);
 	}
-}
+*/}
 
 Eligibility::Eligibility() = default;
 
-Eligibility::Eligibility(const Eligibility &e) : CGPA(e.CGPA), liveBackLog(e.liveBackLog), deadBackLog(e.deadBackLog), yearGap(e.yearGap), passingYear(e.passingYear)
+Eligibility::Eligibility(const Eligibility & e) : CGPA(e.CGPA), liveBackLog(e.liveBackLog), deadBackLog(e.deadBackLog), yearGap(e.yearGap), passingYear(e.passingYear)
 {
 	for (auto it : e.skillExpertiseMap)
 	{
@@ -32,7 +32,7 @@ Eligibility::Eligibility(const Eligibility &e) : CGPA(e.CGPA), liveBackLog(e.liv
 	}
 }
 
-void Eligibility::operator=(const Eligibility &e)
+void Eligibility::operator=(const Eligibility & e)
 {
 	CGPA = e.CGPA;
 	liveBackLog = e.liveBackLog;
@@ -46,9 +46,8 @@ void Eligibility::operator=(const Eligibility &e)
 }
 
 //student on lhs of == operator
-/*
-*/
-bool Eligibility::operator==(const Eligibility &e) const
+
+bool Eligibility::operator==(const Eligibility & e) const
 {
 	cout << "in ==\n";
 	if (CGPA >= e.CGPA && liveBackLog <= e.liveBackLog && deadBackLog <= e.deadBackLog && yearGap <= e.yearGap && passingYear == e.passingYear)
@@ -108,6 +107,11 @@ int Eligibility::getYearGap() const
 	return yearGap;
 }
 
+int Eligibility::getPassingYear() const
+{
+	return passingYear;
+}
+
 void Eligibility::setYearGap(int yg)
 {
 	yearGap = yg;
@@ -124,9 +128,9 @@ void Eligibility::display()
 	cout << "CGPA : " << getCGPA() << endl;
 	cout << "Live Backlog : " << getLiveBackLog() << endl;
 	cout << "Dead Backlog : " << getDeadBackLog() << endl;
-	cout << "Passing year " << getYearGap() << endl;
-
-	cout << "Skills\tExpertise Level " << endl;
+	cout << "Passing year : " << getPassingYear() << endl;
+	cout << "Year Gap : " << getYearGap();
+	cout << "\nSkills\tExpertise Level " << endl;
 	map<string, int>::iterator itr;
 
 	for (itr = skillExpertiseMap.begin(); itr != skillExpertiseMap.end(); ++itr) {

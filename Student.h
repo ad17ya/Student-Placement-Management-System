@@ -22,13 +22,13 @@ private:
 
 	Eligibility studentAcademicDetails; // data member describing student academic details
 	vector<int> potentialOfferId;
-	int callbackHelper(char **argv);
+	int callbackHelper(char** argv);
 
 public:
 	//make get method const
 	Student();
-	Student(string, int, string, string, Date, string, const Eligibility &);
-	Student(const Student &) = default;
+	Student(string, int, string, string, Date, string, const Eligibility&);
+	Student(const Student&) = default;
 
 
 	//getters
@@ -37,18 +37,23 @@ public:
 	string getEmail() const;
 	string getPhoneNumber() const;
 	Date getDate() const;
-
+	string getDepartment() const;
+	Eligibility getEligibility() const;
 	//methods
 	void setName(string);
 	void setID(int);
 	void setEmail(string);
 	void setPhoneNumber(string);
 	void setDOB(Date);
+	void setDepartment(string);
 	void setAcademicDetails(Eligibility);
 
 	Eligibility getAcademicDetails();
-	vector<int> getApplicableOffers();
+	vector<int>& getApplicableOffers();
 	void applyForCompany(int); // int is offerid
-	static int callback(void *, int, char **, char **);
+	static int callback(void*, int, char**, char**);
 	void display();
+
+	void updateStudent(string);
+
 };
