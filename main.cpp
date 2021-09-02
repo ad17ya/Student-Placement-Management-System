@@ -628,7 +628,10 @@ int main()
                         cin >> studentEmail;
                         cout << "Enter student phone number : ";
                         cin >> studentPhoneNumber;
-                        cout << "Enter student DOB(dd/mm/yyyy) : ";
+                        cout << "Enter student DOB : ";
+                        cout << "\nEnter dd ";
+                        cout << "\nEnter mm ";
+                        cout << "\nEnter yyyy ";
                         cin >> dd >> mm >> yyyy;
                         cout << "Enter student department : ";
                         cin >> studentDepartment;
@@ -676,6 +679,11 @@ int main()
                         cout << "\nEnter student index which you want to modify:";
                         cin >> studentChoice;
 
+                        cout << "\nEnter fields as follows ";
+                        cout << "\nName -> studentName ";
+                        cout << "\nPhone Number -> studentPhoneNumber";
+                        cout << "\nEmail -> studentEmail";
+                        cout << "\nDepartment -> studentDepartment\n";
                         cout << "\nEnter which field you want to Modify :";
                         cin >> field;
                         c->getOffers().at(offerChoice).getCollege().at(collegeChoice).getStudent().at(studentChoice).setID(studentChoice + 1);

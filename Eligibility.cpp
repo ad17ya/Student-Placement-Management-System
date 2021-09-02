@@ -124,12 +124,13 @@ void Eligibility::addSkill(string skillName, string skillLevel)
 
 void Eligibility::display()
 {
-	cout << "Eligibility Criteria is " << endl;
+	/* cout << "Eligibility Criteria is " << endl; */
 	cout << "CGPA : " << getCGPA() << endl;
 	cout << "Live Backlog : " << getLiveBackLog() << endl;
 	cout << "Dead Backlog : " << getDeadBackLog() << endl;
-	cout << "Passing year : " << getPassingYear() << endl;
 	cout << "Year Gap : " << getYearGap();
+
+	/* cout << "Passing year : " << getPassingYear() << endl; */
 	/* cout << "\nSkills\tExpertise Level " << endl; */
 	map<string, int>::iterator itr;
 

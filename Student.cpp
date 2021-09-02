@@ -198,6 +198,8 @@ void Student::display() {
     getDate().display();
     cout << "Department : " << getDepartment();
     cout << endl;
+
+    studentAcademicDetails.display();
 }
 
 void updateStudentDatabase(Student* o) {

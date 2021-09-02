@@ -153,7 +153,10 @@ void College::verifyStudent()
 	string data("");
 
 	// Pass queries to sql throught
-	string sql("update student set studentVerificationStatus=1 where studentId IN (select e.studentId from Eligibility e,college_student_AcadmicDetails cs where e.CGPA = cs.CGPA and e.liveBacklog = cs.liveBacklog and e.deadBacklog = cs.deadBacklog and e.passingYear = cs.passingYear and e.yearGap = cs.yearGap and e.studentId = cs.studentId)");
+	/* string sql("update student set studentVerificationStatus=1 where studentId IN (select e.studentId from Eligibility e,college_student_AcadmicDetails cs where e.CGPA = cs.CGPA and e.liveBacklog = cs.liveBacklog and e.deadBacklog = cs.deadBacklog and e.passingYear = cs.passingYear and e.yearGap = cs.yearGap and e.studentId = cs.studentId)"); */
+
+
+	string sql("update student set studentVerificationStatus=1 where studentId IN (select e.studentId from Eligibility e inner join college_student_AcadmicDetails cs on e.studentId = cs.studentId where e.eligibilityCGPA = cs.CGPA and e.eligibilityLiveBacklog = cs.liveBacklog and e.eligibilityDeadBacklog = cs.deadBacklog and e.eligibilityPassingYear = cs.passingYear and e.eligibilityYearGap = cs.yearGap)");
 
 	try
 	{
