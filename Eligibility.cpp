@@ -130,7 +130,7 @@ void Eligibility::display()
 	cout << "Dead Backlog : " << getDeadBackLog() << endl;
 	cout << "Passing year : " << getPassingYear() << endl;
 	cout << "Year Gap : " << getYearGap();
-	cout << "\nSkills\tExpertise Level " << endl;
+	/* cout << "\nSkills\tExpertise Level " << endl; */
 	map<string, int>::iterator itr;
 
 	for (itr = skillExpertiseMap.begin(); itr != skillExpertiseMap.end(); ++itr) {

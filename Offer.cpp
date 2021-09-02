@@ -241,7 +241,7 @@ void Offer::updateOffer(string field) {
 		setPackage(newPackage);
 		updateOfferDatabase(this);
 	}
-	else if (field == "bond") {
+	else if (field == string("bond")) {
 		cout << "enter new job bond : ";
 		float newBond;
 		cin >> newBond;

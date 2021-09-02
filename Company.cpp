@@ -349,7 +349,7 @@ int Company::getCompanyId(string cname) const
 	}
 
 	catch (short i) {
-		cout << "Company not fonund :" ;
+		cout << "Company not found :" ;
 	}
 
 	return 0;
