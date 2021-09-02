@@ -31,8 +31,8 @@ void College::addStudent(const Student& s,int collegeId) {
 
 		string sql;
 
-		sql = "INSERT INTO STUDENT (studentName,studentDOB,studentEmail,studentPhoneNumber,studentDepartment,studentVerificationStatus,collegeId) VALUES ('" +
-			s.getName() + "','" + to_string(s.getDate().getDay() + '/' + s.getDate().getMonth() + ' / ' +
+		sql = "INSERT INTO STUDENT (studentId,studentName,studentDOB,studentEmail,studentPhoneNumber,studentDepartment,studentVerificationStatus,collegeId) VALUES (" + to_string(s.getID()) + ",'" +
+			s.getName() + "','" + to_string(s.getDate().getDay() + '/' + s.getDate().getMonth() + '/' +
 			s.getDate().getYear())  + "','" + s.getEmail() + "','" + s.getPhoneNumber()+"','"+s.getDepartment()
 			+"',0,"+ to_string(collegeId) + ")";
 
@@ -40,17 +40,17 @@ void College::addStudent(const Student& s,int collegeId) {
 		int rc = sqlite3_exec(DB, sql.c_str(), NULL, NULL, &messageError);
 
 		if (rc != SQLITE_OK)
-			throw (short)1;
+			throw (int)1;
 
-		sql = "INSERT INTO ELIGIBILITY (eligibilityCGPA,eligibilityLiveBacklog,eligibilityDeadBacklog,eligibilityPassingYear,eligibilityYearGap) VALUES (" +
+		sql = "INSERT INTO ELIGIBILITY (eligibilityCGPA,eligibilityLiveBacklog,eligibilityDeadBacklog,eligibilityPassingYear,eligibilityYearGap, studentId) VALUES (" +
 			to_string(s.getEligibility().getCGPA()) + "," + to_string(s.getEligibility().getLiveBackLog()) + "," +
 			to_string(s.getEligibility().getDeadBackLog()) + "," + to_string(s.getEligibility().getPassingYear()) + ","
-			+ to_string(s.getEligibility().getYearGap()) + ")";
+			+ to_string(s.getEligibility().getYearGap()) + ","  + to_string(s.getID()) + ")";
 
 		rc = sqlite3_exec(DB, sql.c_str(), NULL, NULL, &messageError);
 
 		if (rc != SQLITE_OK)
-			throw (short)1;
+			throw (int)1;
 
 	}
 
@@ -59,7 +59,7 @@ void College::addStudent(const Student& s,int collegeId) {
 	}
 
 	catch (short i) {
-		cout << "Error in Insert Data :";
+		cout << "\nError in Insert Data : \n";
 	}
 
 	sqlite3_close(DB);

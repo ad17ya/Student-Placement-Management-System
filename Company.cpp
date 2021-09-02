@@ -121,7 +121,7 @@ void Company::setOffer(Offer of,string cName)
 
 		sql = "INSERT INTO OFFER  (offerPackage,offerLocation,offerRole,offerDeadline,offerBond,CompanyId) VALUES (" +
 			to_string(of.getPackage()) + ",'" + of.getJobLocation() + "','" + of.getJobRole() + "','"+
-			to_string(of.getDeadline().getDay() + '/' + of.getDeadline().getMonth() + ' / ' +
+			to_string(of.getDeadline().getDay() + '/' + of.getDeadline().getMonth() + '/' +
 			of.getDeadline().getYear())+"'," +to_string(of.getBond()) + ", " +to_string(getCompanyId(cName)) + ")";
 
 		int rc= sqlite3_exec(DB, sql.c_str(),NULL, NULL, &messageError);
