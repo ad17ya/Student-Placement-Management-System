@@ -11,7 +11,6 @@ Offer::Offer(string role, string location, float pack, float bo, Date deadline, 
 
 Offer::Offer(int id,string role, string location, float pack, float bo, Date deadline, const Eligibility& eObj, vector<College> cvObj) :
 	offerId(id),jobRole(role), jobLocation(location), package(pack), bond(bo), applicationDeadline(deadline), eligibilityCriteria(eObj) {
-	cout << "CONSTR CALLS";
 	collgeList = cvObj;
 }
 
@@ -43,10 +42,10 @@ void Offer::addCollege(College collgeObj) {
 
 void Offer::addCollege(College collgeObj,int offerId) {
 	collgeList.push_back(collgeObj);
-
+	
 	sqlite3* DB;
 	int exit;
-	exit = sqlite3_open("campusDatabase.db", &DB);
+	exit = sqlite3_open("D:\\persistent\\project_123\\Student-Placement-Management-System\\database\\campusDatabase.db", &DB);
 	char* messageError;
 
 	try {
@@ -173,6 +172,19 @@ void Offer::display() {
 	getEligibility().display();
 }
 
+College& Offer::search(string cName)
+{
+	vector<College> ::iterator it;
+
+	for ( it = collgeList.begin() ; it != collgeList.end() ; it++)
+	{
+		if (it->getName() == cName)
+			return *it;
+	}
+
+	throw string("College not found");
+}
+
 
 void updateOfferDatabase(Offer* o) {
 	sqlite3* db;
@@ -180,7 +192,7 @@ void updateOfferDatabase(Offer* o) {
 	int rc;
 	string sql;
 	try {
-		rc = sqlite3_open("campusDatabase.db", &db);
+		rc = sqlite3_open("D:\\persistent\\project_123\\Student-Placement-Management-System\\database\\campusDatabase.db", &db);
 
 
 

@@ -224,7 +224,6 @@ void Company::setPlacedStudents(set<int> studentIdList, int offerId) {
 static int callback(void* data, int argc, char** argv, char** azColName)
 {
 	int i;
-	fprintf(stderr, "%s: ", (const char*)data);
 
 	for (i = 0; i < argc; i++) {
 		printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
@@ -271,6 +270,54 @@ void Company::display() {
 	cout << "Name :" << getName() << endl;
 	cout << "Email:" << getEmail() << endl;
 	cout << "Phone Number :" << getPhoneNumber() << endl;
+}
+
+Offer& Company::search(string oName)
+{
+	vector<Offer> ::iterator it;
+
+	for (it = offers.begin(); it != offers.end(); it++) {
+		if (it->getJobRole() == oName) {
+			return *it;
+		}
+	}
+
+	throw string("not found");
+}
+
+void Company::sort()
+{
+	sqlite3* DB;
+	int exit;
+	exit = sqlite3_open("campusDatabase.db", &DB);
+	char* messageError;
+
+	try {
+		if (exit)
+			throw exit;
+
+		string sql;
+		sql = "SELECT offerRole,offerLocation,offerPackage FROM Offer ORDER BY offerPackage DESC" ;
+		int rc = sqlite3_exec(DB, sql.c_str(), callback, NULL, &messageError);
+
+
+		if (rc != SQLITE_OK)
+			throw (short)1;
+
+	}
+
+	catch (int exit) {
+		std::cerr << "Error open DB " << sqlite3_errmsg(DB) << endl;
+	}
+
+	catch (short i) {
+		cout << "Error in Insert Data :";
+	}
+
+
+	sqlite3_close(DB);
+
+
 }
 
 int Company::getCompanyId() const

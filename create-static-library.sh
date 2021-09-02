@@ -2,7 +2,7 @@
 
 echo "Creating static libraries"
 
-g++ -c main.cpp -o main.o
+# g++ -c main.cpp -o main.o
 g++ -c College.cpp -o College.o
 g++ -c Company.cpp -o Company.o
 g++ -c Offer.cpp -o Offer.o

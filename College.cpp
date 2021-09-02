@@ -126,7 +126,6 @@ string College::getPhoneNumber() const
 static int callback(void* data, int argc, char** argv, char** azColName)
 {
 	int i;
-	fprintf(stderr, "%s: ", (const char*)data);
 
 	for (i = 0; i < argc; i++)
 	{
@@ -195,7 +194,6 @@ void College::viewEnrolledStudents()
 		if (exit)
 			throw exit;
 
-		std::cout << "Opened database successfully" << std::endl;
 
 		int rc = sqlite3_exec(DB, sql.c_str(), callback, (void*)data.c_str(), NULL);
 		std::cout << std::endl;
@@ -206,7 +204,6 @@ void College::viewEnrolledStudents()
 			throw (short)-1;
 		}
 
-		cout << "Operation OK!" << endl;
 	}
 
 	catch (int exit) {
@@ -238,18 +235,14 @@ void College::viewPlacedStudents() {
 		if (exit)
 			throw exit;
 
-		std::cout << "Opened database successfully" << std::endl;
-
 		int rc = sqlite3_exec(DB, sql.c_str(), callback, (void*)data.c_str(), NULL);
 		std::cout << std::endl;
-
 
 		if (rc != SQLITE_OK)
 		{
 			throw (short)-1;
 		}
 
-		cout << "Operation OK!" << endl;
 	}
 
 	catch (int exit) {
@@ -318,6 +311,40 @@ void College::display() {
 	cout << "Name :" << getName() << endl;
 	cout << "Email:" << getEmail() << endl;
 	cout << "Phone Number :" << getPhoneNumber() << endl;
+}
+
+void College::sort(int cId)
+{
+	sqlite3* DB;
+	int exit;
+	exit = sqlite3_open("campusDatabase.db", &DB);
+	char* messageError;
+
+	try {
+		if (exit)
+			throw exit;
+
+		string sql;
+		sql = "SELECT studentName,eligibilityCGPA, Student.collegeId  FROM Student,Eligibility WHERE Student.collegeId = "+ to_string(cId) + " AND Eligibility.studentId = Student.studentId ORDER BY eligibilityCGPA DESC";
+		int rc = sqlite3_exec(DB, sql.c_str(), callback, NULL, &messageError);
+
+
+		if (rc != SQLITE_OK)
+			throw (short)1;
+
+	}
+
+	catch (int exit) {
+		std::cerr << "Error open DB " << sqlite3_errmsg(DB) << endl;
+	}
+
+	catch (short i) {
+		cout << "Error in Insert Data :";
+	}
+
+
+	sqlite3_close(DB);
+
 }
 
 void updateCollegeDatabase(College* o) {

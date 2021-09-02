@@ -44,6 +44,7 @@ public:
 
 	void display();
 	void updateCollege(string);
+	void sort(int);
 
 	//Destructor
 	~College() = default;

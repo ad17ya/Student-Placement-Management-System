@@ -132,7 +132,7 @@ vector<int>& Student::getApplicableOffers()
     string sql("SELECT * from Company_offer INNER JOIN Company_criteria ON Company_offer.id = Company_criteria.offerId_id;");
     sqlite3* DB;
     int exit = 0;
-    exit = sqlite3_open("db.sqlite3", &DB);
+    exit = sqlite3_open("campusDatabase.db", &DB);
     string data("CALLBACK FUNCTION");
 
     if (exit)
@@ -160,16 +160,6 @@ vector<int>& Student::getApplicableOffers()
     return potentialOfferId;
 }
 
-static int insertCallback(void* NotUsed, int argc, char** argv, char** azColName)
-{
-    int i;
-    for (i = 0; i < argc; i++)
-    {
-        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-    }
-    printf("\n");
-    return 0;
-}
 
 void Student::applyForCompany(int offerId)
 {
@@ -177,10 +167,10 @@ void Student::applyForCompany(int offerId)
     char* zErrMsg = 0;
     int rc;
     string comma = ",";
-    string sql(string("INSERT INTO College_intermediatestudentstatus (offerId, status, studentId,studentName) VALUES (") + to_string(offerId) + string(",0,") + to_string(studentId) + ",'" + studentName + "')");
+    string sql(string("INSERT INTO COLLEGE_INTERMEDIATESTUDENTSTATUS (offerId, status, studentId,studentName) VALUES (") + to_string(offerId) + string(",0,") + to_string(studentId) + ",'" + studentName + "')");
 
     /* Open database */
-    rc = sqlite3_open("db.sqlite3", &db);
+    rc = sqlite3_open("campusDatabase.db", &db);
 
     if (rc)
     {
@@ -188,7 +178,7 @@ void Student::applyForCompany(int offerId)
         return;
     }
 
-    rc = sqlite3_exec(db, sql.c_str(), insertCallback, 0, &zErrMsg);
+    rc = sqlite3_exec(db, sql.c_str(), NULL , 0, &zErrMsg);
 
     if (rc != SQLITE_OK)
     {

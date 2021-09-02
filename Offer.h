@@ -46,6 +46,8 @@ public:
 	Eligibility getEligibility() const;
 
 	void display();
+	College& search(string);
+
 	void updateOffer(string);
 	~Offer() = default;														//Destructor
 };

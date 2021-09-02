@@ -42,7 +42,8 @@ public:
 	void showAppliedStudents(int);
 
 	void display();
-	
+	Offer& search(string);
 
+	void sort();
 	~Company() = default;									//Destructor
 };
