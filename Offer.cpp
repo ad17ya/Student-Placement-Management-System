@@ -42,10 +42,10 @@ void Offer::addCollege(College collgeObj) {
 
 void Offer::addCollege(College collgeObj,int offerId) {
 	collgeList.push_back(collgeObj);
-	
+
 	sqlite3* DB;
 	int exit;
-	exit = sqlite3_open("D:\\persistent\\project_123\\Student-Placement-Management-System\\database\\campusDatabase.db", &DB);
+	exit = sqlite3_open("campusDatabase.db", &DB);
 	char* messageError;
 
 	try {
@@ -192,7 +192,7 @@ void updateOfferDatabase(Offer* o) {
 	int rc;
 	string sql;
 	try {
-		rc = sqlite3_open("D:\\persistent\\project_123\\Student-Placement-Management-System\\database\\campusDatabase.db", &db);
+		rc = sqlite3_open("campusDatabase.db", &db);
 
 
 

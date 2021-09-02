@@ -184,7 +184,6 @@ vector<Offer>& Company::getOffers()
 }
 
 
-
 void Company::setPlacedStudents(set<int> studentIdList, int offerId) {
 	char* messageError;
 	sqlite3* DB;

@@ -136,6 +136,15 @@ static int callback(void* data, int argc, char** argv, char** azColName)
 	return 0;
 }
 
+static int updateStatusCallback(void* data, int argc, char** argv, char** azColName)
+{
+
+	(*(map<int, int>*)data).insert(make_pair(atoi(argv[0]),atoi(argv[1])));
+
+	return 0;
+}
+
+
 void College::verifyStudent()
 {
 	sqlite3* DB;
@@ -269,18 +278,30 @@ void College::updateStudentPlacedStatus()
 	string data("");
 
 	// Update all records of the students placed from temporary table to the college database
-	string sql("update student set studentVerificationStatus=1 where studentId IN (select e.studentId from Eligibility e,college_student_AcadmicDetails cs here e.eligibilityCGPA = cs.CGPA and e.eligibilityLiveBacklog = cs.liveBacklog and e.eligibilityDeadBacklog = cs.deadBacklog and e.eligibilityPassingYear = cs.passingYear and e.eligibilityYearGap =cs.yearGap and e.studentId = cs.studentId)");
-
+	string sql;
 	try
 	{
 		if (exit)
 			throw exit;
 
 		std::cout << "Opened database successfully" << std::endl;
+		sql = "select studentId ,offerId from COLLEGE_INTERMEDIATESTUDENTSTATUS where status = 1;";
 
-		int rc = sqlite3_exec(DB, sql.c_str(), NULL, NULL, NULL);
+		map<int, int> mapStatus;
+		int rc = sqlite3_exec(DB, sql.c_str(), updateStatusCallback, &mapStatus, NULL);
+
+
+		for (auto it : mapStatus) {
+			sql = "update student set placedOfferId = "+ to_string(it.second) +" where studentId ="+ to_string(it.first);
+			int rc = sqlite3_exec(DB, sql.c_str(), NULL , NULL , NULL);
+			if (rc != SQLITE_OK)
+			{
+				throw (short)-1;
+			}
+
+		}
+
 		std::cout << std::endl;
-
 
 		if (rc != SQLITE_OK)
 		{

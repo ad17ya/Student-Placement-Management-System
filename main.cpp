@@ -9,6 +9,7 @@
 #include "Company.h"
 #include "Date.h"
 #include "Offer.h"
+#include<map>
 using namespace std;
 
 
@@ -227,12 +228,13 @@ int main()
     string skill, collegeName, collegeEmail, collegePhone, studentName, studentEmail, studentPhoneNumber, studentDepartment;
     string companyName, companyEmail, companyPNumber, field;
     int count;
+    set<int> sid;
 
     while (1)
     {
         cout << "\n\n************** MENU ***************"<<endl;
         cout << "Student Placement Management System" << endl;
-        cout << "1-Company \n2-College\n3-Student : \n";
+        cout << "1-Company \n2-College\n3-Student : ";
         cin >> userChoice;
         cout << "\n\n";
         switch (userChoice)
@@ -245,6 +247,7 @@ int main()
             cout << "5.Search Offer" << endl;
             cout << "6.Sort Offer "<<endl;
             cout << "7.View Applied students for Offer" << endl;
+            cout << "8.Set Placed Students " << endl;
             cin >> companyChoice;
 
             switch (companyChoice)
@@ -353,6 +356,28 @@ int main()
                 c->showAppliedStudents((offerChoice + 1));
                 break;
 
+            case 8:
+                count = 0;
+                int n,s;
+                cout << "\nIndex\tJobRole\tJobLocation" << endl;
+                for (auto it : c->getOffers())
+                {
+                    cout << count << "\t" << it.getJobRole() << "\t" << it.getJobLocation() << "\t" << endl;
+                    count++;
+                }
+                cout << "Enter offer index to set placed students :";
+                cin >> offerChoice;
+
+                cout << "Enter number of student placed :";
+                cin >> n;
+
+                for (int i = 0; i < n; i++) {
+                    cout << "Enter Student Id of placed students :";
+                    cin >> s;
+                    sid.insert(s);
+                }
+
+                c->setPlacedStudents(sid, offerChoice + 1);
                 break;
 
             default:
@@ -370,6 +395,7 @@ int main()
             cout << "6. Sort Students " << endl;
             cout << "7. View Enrolled students " << endl;
             cout << "8. View placed students " << endl;
+            cout << "9. Update Student Placement Status " << endl;
             cin >> collegeChoice;
 
             switch (collegeChoice)
@@ -569,10 +595,33 @@ int main()
                     count++;
                 }
                 cout << "Enter college index : ";
-
                 cin >> collegeChoice;
                 cout << "\nPlaced students in College are follows :" << endl;
                 (c->getOffers()).at(offerChoice).getCollege().at(collegeChoice).viewPlacedStudents();
+                break;
+
+            case 9:
+                cout << "\nIndex\tJobRole\tJobLocation" << endl;
+                count = 0;
+                for (auto it : c->getOffers())
+                {
+                    cout << count << "\t" << it.getJobRole() << "\t" << it.getJobLocation() << endl;
+                    count++;
+                }
+                cout << "Enter offer index :";
+                cin >> offerChoice;
+
+                cout << "\nIndex\tCollegeName\tCOllegeCode" << endl;
+                count = 0;
+                for (auto it : c->getOffers().at(offerChoice).getCollege())
+                {
+                    cout << count << "\t" << it.getName() << "\t" << it.getCollegeCode() << endl;
+                    count++;
+                }
+                cout << "Enter college index : ";
+                cin >> collegeChoice;
+                (c->getOffers()).at(offerChoice).getCollege().at(collegeChoice).updateStudentPlacedStatus();
+
                 break;
 
             default:
