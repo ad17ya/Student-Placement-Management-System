@@ -59,7 +59,7 @@ static int companyCallback(void* data, int argc, char** argv, char** azColName)
 
 static int offerCallback(void* data, int argc, char** argv, char** azColName)
 {
-    (*(Company*)data).setOffer(Offer(atoi(argv[0]), argv[3], argv[2], atof(argv[1]), atof(argv[5]), Date(1, 1, 1), Eligibility(), vector<College>()));
+    (*(Company*)data).setOffer(Offer(atoi(argv[0]), argv[3], argv[2], atof(argv[1]), atof(argv[5]), Date(12,12,2021), Eligibility(), vector<College>()));
     return 0;
 }
 
@@ -76,7 +76,7 @@ static int studentCallback(void* data, int argc, char** argv, char** azColName)
     int offerIndex = getIndexOffer((*(Company*)data), offerId);
     int collegeIndex = getIndexCollege((*(Company*)data), offerId, atoi(argv[7]));
     if (collegeIndex != -1) {
-        (*(Company*)data).getOffers().at(offerIndex).getCollege().at(collegeIndex).addStudent(Student(argv[1], atoi(argv[0]), argv[3], argv[4], Date(4, 4, 4), argv[5], Eligibility()));
+        (*(Company*)data).getOffers().at(offerIndex).getCollege().at(collegeIndex).addStudent(Student(argv[1], atoi(argv[0]), argv[3], argv[4], Date(11,12,1999), argv[5], Eligibility()));
     }
     return 0;
 }
@@ -805,6 +805,8 @@ int main()
                 break;
         }
     }
+
+    delete c;
 }
 
 // End of file
